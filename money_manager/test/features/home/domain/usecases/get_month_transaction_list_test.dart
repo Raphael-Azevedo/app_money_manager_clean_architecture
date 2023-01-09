@@ -22,6 +22,7 @@ void main() {
       value: 1.0,
       title: 'test',
       description: 'test',
+      category : "Casa",
       date: DateTime.now(),
     )];
   });

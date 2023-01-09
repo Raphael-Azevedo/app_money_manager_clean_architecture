@@ -9,30 +9,35 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         "Value": -191.90,
         "Title": "Conta de luz",
         "Description": "Conta de luz do mês de dezembro",
+        "Category": "Moradia",
         "Date": "2023-01-01T13:33:03.969Z"
       },
       {
         "Value": 1200,
         "Title": "Pagamento Nathalie",
         "Description": "Pagamento dia 30 de Nathalie",
+        "Category": "Moradia",
         "Date": "2023-01-01T13:33:03.969Z"
       },
       {
         "Value": 930,
         "Title": "Pagamento Raphael",
         "Description": "Pagamento dia 30 de Raphael",
+        "Category": "Moradia",
         "Date": "2023-01-01T13:33:03.969Z"
       },
       {
         "Value": -112.55,
         "Title": "Conta de água",
         "Description": " Conta de agua do mês de dezembro",
+        "Category": "Moradia",
         "Date": "2023-01-01T13:33:03.969Z"
       },
       {
         "Value": -112.55,
         "Title": "Conta de água",
         "Description": "Conta de agua do mês de dezembro",
+        "Category": "Moradia",
         "Date": "2023-01-01T13:33:03.969Z"
       }
     ];

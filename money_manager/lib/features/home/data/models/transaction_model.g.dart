@@ -11,6 +11,7 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
       value: (json['Value'] as num).toDouble(),
       title: json['Title'] as String,
       description: json['Description'] as String,
+      category: json['Category'] as String,
       date: DateTime.parse(json['Date'] as String),
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
       'Value': instance.value,
       'Title': instance.title,
       'Description': instance.description,
+      'Category': instance.category,
       'Date': instance.date.toIso8601String(),
     };

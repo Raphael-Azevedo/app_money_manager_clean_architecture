@@ -9,11 +9,13 @@ class TransactionModel extends Transaction {
     required double value,
     required String title,
     required String description,
+      required String category,
     required DateTime date,
   }) : super(
           value: value,
           title: title,
           description: description,
+          category: category,
           date: date,
         );
 

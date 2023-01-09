@@ -11,6 +11,7 @@ void main() {
     value: 1.0,
     title: 'test',
     description: 'test',
+    category: "Casa",
     date: DateTime.parse("2019-07-04T13:33:03.969Z"),
   );
 
@@ -51,6 +52,7 @@ void main() {
             "Value": 1.0,
             "Title": "test",
             "Description": "test",
+            "Category": "Casa",
             "Date": "2019-07-04T13:33:03.969Z"
           };
           expect(result, equals(expectedMap));

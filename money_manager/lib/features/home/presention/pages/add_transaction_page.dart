@@ -74,12 +74,34 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   ),
                 ),
               ),
-              Row(
-                children: const [
-                  CategoryCard(cardName: 'Casa', iconButton: Icons.home),
-                  CategoryCard(
-                      cardName: 'Lanche', iconButton: Icons.fastfood_rounded),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: const [
+                    CategoryCard(cardName: 'Moradia', iconButton: Icons.home),
+                    CategoryCard(
+                        cardName: 'Lanche', iconButton: Icons.fastfood_rounded),
+                    CategoryCard(
+                        cardName: 'Alimentação', iconButton: Icons.restaurant),
+                    CategoryCard(
+                        cardName: 'Transporte', iconButton: Icons.train),
+                    CategoryCard(
+                        cardName: 'Vestuário',
+                        iconButton: Icons.shopify_rounded),
+                    CategoryCard(cardName: 'Saúde', iconButton: Icons.favorite),
+                    CategoryCard(
+                        cardName: 'Lazer',
+                        iconButton: Icons.pedal_bike_rounded),
+                    CategoryCard(
+                        cardName: 'Educação',
+                        iconButton: Icons.menu_book_outlined),
+                    CategoryCard(
+                        cardName: 'Segurança', iconButton: Icons.security),
+                    CategoryCard(
+                        cardName: 'Outros',
+                        iconButton: Icons.work_outline_sharp),
+                  ],
+                ),
               ),
               AdaptativeDataPicker(
                 selecetedDate: selecetedDate,

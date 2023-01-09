@@ -33,6 +33,7 @@ void main() {
           value: 18.80,
           title: 'title',
           description: 'description',
+          category : "Casa",
           date: DateTime.now())
     ];
     final List<Transaction> tTransaction = tTransactionModel;
