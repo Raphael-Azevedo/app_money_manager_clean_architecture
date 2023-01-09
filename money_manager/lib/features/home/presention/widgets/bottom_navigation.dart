@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/features/home/presention/pages/home_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({
@@ -26,14 +27,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
             children: [
               IconButton(
                 onPressed: () {
+                  Navigator.pushReplacementNamed(context, HomePage.route);
                 },
                 icon: const Icon(Icons.home),
                 color: Colors.white,
               ),
               IconButton(
-                onPressed: () {
-                 
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.payment),
                 color: Colors.white,
               ),

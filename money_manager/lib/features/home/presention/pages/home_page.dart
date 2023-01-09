@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:money_manager/features/home/presention/pages/transaction_page.dart';
 
+import '../../../../core/common_widgets/app_drawer.dart';
 import '../../../../core/dependency_injection/injection_container.dart';
 import '../controller/home_controller.dart';
 import '../widgets/bottom_navigation.dart';
 import '../widgets/home_card.dart';
-import '../widgets/list_recent_transactions.dart';
+import '../../../../core/common_widgets/list_recent_transactions.dart';
 
 class HomePage extends StatefulWidget {
   static String route = 'home';
@@ -38,17 +40,20 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Despesas Pessoais'),
         ),
-        drawer: const Drawer(),
+        drawer: const AppDrawer(),
         body: SingleChildScrollView(
           child: Column(
             children: [
               HomeCard(controller: controller),
+              const SizedBox(height: 20),
               RecentTransactions(controller: controller),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, TransactionPage.route);
+          },
           shape: const CircleBorder(),
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: const Icon(Icons.add),
@@ -59,24 +64,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-  //  bottomNavigationBar: Observer(
-  //         builder: (_) => CowInfoBottomAppBar(
-  //           showCalfCloud: widget.controller.showCalfCloudButton,
-  //           onCalfCloudPressed: () {
-  //             Navigator.pushNamed(context, CalfCloudPage.route,
-  //                 arguments: widget.controller.cowInfoAnimal!.id);
-  //           },
-  //           onPenHistoryPressed: () {
-  //             Navigator.pushNamed(context, PenHistoryPage.route,
-  //                 arguments: widget.controller.cowInfoAnimal!.id);
-  //           },
-  //           onGroupViewPressed: () {
-  //             Navigator.pushNamed(context, GroupViewPage.route,
-  //                 arguments: widget.controller.cowInfoAnimal!.penId);
-  //           },
-  //           onTimelinePressed: () {
-  //             scaffoldKey.currentState!.openEndDrawer();
-  //           },
-  //         ),
-  //       ),

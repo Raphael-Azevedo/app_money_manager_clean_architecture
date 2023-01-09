@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
-import '../controller/home_controller.dart';
+import '../../features/home/presention/controller/home_controller.dart';
 
 class RecentTransactions extends StatefulWidget {
   final HomeController controller;
@@ -16,7 +16,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 40),
+      margin: const EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(
         color: Color.fromARGB(235, 230, 180, 247),
         borderRadius: BorderRadius.only(
@@ -38,7 +38,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
           const SizedBox(height: 10),
           Observer(
             builder: ((_) => SizedBox(
-                  height: 300,
+                  height: 450,
                   child: ListView.builder(
                     itemCount: widget.controller.transactionList.length,
                     itemBuilder: ((context, index) => Container(
