@@ -67,7 +67,7 @@ class _TransactionPageState extends State<TransactionPage> {
                   child: BarChartTransaction(controller: controller)),
               const SizedBox(height: 30),
               const SegmentedControlTransaction(currentSelection: 0),
-              RecentTransactions(controller: controller),
+              RecentTransactions(false, controller: controller),
             ],
           ),
         ),

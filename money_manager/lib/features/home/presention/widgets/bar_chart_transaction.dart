@@ -146,52 +146,49 @@ class BarChartTransactionState extends State<BarChartTransaction> {
   }
 
   List<BarChartGroupData> getData() {
-    return [
-      BarChartGroupData(
-        x: 0,
-        barsSpace: 8,
-        barRods: [
-          BarChartRodData(
-            toY: 17000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 2000000000, dark),
-              BarChartRodStackItem(2000000000, 12000000000, normal),
-              BarChartRodStackItem(12000000000, 17000000000, light),
-            ],
-            borderRadius: BorderRadius.circular(25),
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 2,
-        barsSpace: 8,
-        barRods: [
-          BarChartRodData(
-            toY: 34000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 6000000000, dark),
-              BarChartRodStackItem(6000000000, 23000000000, normal),
-              BarChartRodStackItem(23000000000, 34000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-        ],
-      ),
-      BarChartGroupData(
-        x: 3,
-        barsSpace: 8,
-        barRods: [
-          BarChartRodData(
-            toY: 14000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 1000000000.5, dark),
-              BarChartRodStackItem(1000000000.5, 12000000000, normal),
-              BarChartRodStackItem(12000000000, 14000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          )
-        ],
-      ),
+    List<BarChartGroupData> data = [];
+    List<String> months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ];
+
+    for (int i = 0; i < months.length; i++) {
+      if (widget.controller.chartBar[months[i]] != null) {
+        data.add(getBarChartGroupData(
+            months[i], widget.controller.chartBar[months[i]], i));
+      }
+    }
+    return data;
+  }
+
+  BarChartGroupData getBarChartGroupData(
+      String month, Map<String, dynamic> data, int index) {
+    return BarChartGroupData(
+      x: index,
+      barsSpace: 8,
+      barRods: [
+        BarChartRodData(
+          toY: data['valueCost'] + data['valueEntrance'],
+          rodStackItems: [
+            BarChartRodStackItem(0, data['valueCost'], dark),
+            BarChartRodStackItem(
+                data['valueCost'], data['valueEntrance'], normal),
+            BarChartRodStackItem(data['valueEntrance'],
+                data['valueEntrance'] + data['valueCost'], light),
+          ],
+          borderRadius: BorderRadius.circular(25),
+        )
+      ],
+    );
   }
 }

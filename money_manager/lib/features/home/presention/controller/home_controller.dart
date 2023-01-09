@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
 import 'package:money_manager/features/home/domain/usecases/get_year_transaction_list.dart';
@@ -30,6 +31,9 @@ abstract class _HomeControllerBase with Store {
   double valueCost = 0;
 
   @observable
+  late Map<String, dynamic> chartBar = {};
+
+  @observable
   late List<Transaction> transactionList = [];
 
   @observable
@@ -51,6 +55,9 @@ abstract class _HomeControllerBase with Store {
     final result = await getMonthTransactionListUseCase(sl());
     result!.fold((l) {}, (r) {
       transactionList = ObservableList.of(r);
+      valueTotal = 0;
+      valueEntrance = 0;
+      valueCost = 0;
       for (var e in transactionList) {
         valueTotal = e.value + valueTotal;
         if (e.value > 0) {
@@ -66,7 +73,35 @@ abstract class _HomeControllerBase with Store {
   Future<void> getAllTransactions() async {
     final result = await getYearTransactionListUseCase(sl());
     result!.fold((l) {}, (r) {
-      transactionList = ObservableList.of(r);
+      allTransactionList = ObservableList.of(r);
+      chartBar = {};
+      chartBar = _agroupTransactionsPerMes(allTransactionList, chartBar);
     });
+  }
+
+  Map<String, dynamic> _agroupTransactionsPerMes(
+      List transacoes, Map<String, dynamic> meses) {
+    for (var transacao in transacoes) {
+      String mes = DateFormat.MMMM().format(transacao.date);
+
+      if (!meses.containsKey(mes)) {
+        meses[mes] = {
+          'valueCost': 0.0,
+          'valueEntrance': 0.0,
+          'valueTotal': 0.0,
+        };
+      }
+
+      if (transacao.value < 0) {
+        meses[mes]['valueCost'] += (transacao.value * -1.0);
+      } else {
+        meses[mes]['valueEntrance'] += transacao.value;
+      }
+
+      meses[mes]['valueTotal'] =
+          meses[mes]['valueEntrance'] + meses[mes]['valueCost'];
+    }
+
+    return meses;
   }
 }

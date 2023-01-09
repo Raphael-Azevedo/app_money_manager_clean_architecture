@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               HomeCard(controller: controller),
               const SizedBox(height: 20),
-              RecentTransactions(controller: controller),
+              RecentTransactions(true, controller: controller),
             ],
           ),
         ),

@@ -6,6 +6,7 @@ import 'package:money_manager/features/home/data/repositories/home_repository_im
 import 'package:money_manager/features/home/domain/repositories/home_repository.dart';
 import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
 import 'package:money_manager/features/home/presention/controller/home_controller.dart';
+import 'package:money_manager/features/home/presention/pages/transaction_page.dart';
 
 import '../../features/home/domain/usecases/get_year_transaction_list.dart';
 import '../../features/home/presention/pages/home_page.dart';
@@ -14,7 +15,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   sl.registerLazySingleton(() => NoParams());
-  sl.registerFactory(() => HomeController(
+  sl.registerLazySingleton(() => HomeController(
       getMonthTransactionListUseCase: sl(),
       getYearTransactionListUseCase: sl()));
   // Use cases
@@ -29,4 +30,5 @@ Future<void> init() async {
       () => HomeRemoteDataSourceImpl());
 
   sl.registerFactory(() => const HomePage());
+  sl.registerFactory(() => const TransactionPage());
 }

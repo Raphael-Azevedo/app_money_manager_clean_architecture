@@ -73,6 +73,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$chartBarAtom =
+      Atom(name: '_HomeControllerBase.chartBar', context: context);
+
+  @override
+  Map<String, dynamic> get chartBar {
+    _$chartBarAtom.reportRead();
+    return super.chartBar;
+  }
+
+  @override
+  set chartBar(Map<String, dynamic> value) {
+    _$chartBarAtom.reportWrite(value, super.chartBar, () {
+      super.chartBar = value;
+    });
+  }
+
   late final _$transactionListAtom =
       Atom(name: '_HomeControllerBase.transactionList', context: context);
 
@@ -131,6 +147,7 @@ isBusy: ${isBusy},
 valueTotal: ${valueTotal},
 valueEntrance: ${valueEntrance},
 valueCost: ${valueCost},
+chartBar: ${chartBar},
 transactionList: ${transactionList},
 allTransactionList: ${allTransactionList}
     ''';
