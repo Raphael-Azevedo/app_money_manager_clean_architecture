@@ -15,7 +15,7 @@ class AdaptativeDataPicker extends StatelessWidget {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2030),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
@@ -34,7 +34,6 @@ class AdaptativeDataPicker extends StatelessWidget {
               mode: CupertinoDatePickerMode.date,
               initialDateTime: DateTime.now(),
               minimumDate: DateTime(2019),
-              maximumDate: DateTime.now(),
               onDateTimeChanged: onDateChanged,
             ),
           )

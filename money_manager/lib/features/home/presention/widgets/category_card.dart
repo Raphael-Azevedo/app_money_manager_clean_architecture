@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/dependency_injection/injection_container.dart';
+import '../controller/home_controller.dart';
+
 class CategoryCard extends StatefulWidget {
   final String cardName;
   final IconData iconButton;
@@ -12,6 +15,14 @@ class CategoryCard extends StatefulWidget {
 
 class _CategoryCardState extends State<CategoryCard> {
   bool selecionado = false;
+  late final HomeController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = sl<HomeController>();
+  }
+
   late int valorSelecionado;
   @override
   Widget build(BuildContext context) {
@@ -22,6 +33,9 @@ class _CategoryCardState extends State<CategoryCard> {
           setState(() {
             selecionado = !selecionado;
             valorSelecionado = 1;
+            if (selecionado) {
+              controller.categoryController = widget.cardName;
+            }
           });
         },
         child: AnimatedContainer(

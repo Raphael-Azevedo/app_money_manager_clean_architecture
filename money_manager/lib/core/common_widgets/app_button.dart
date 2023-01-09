@@ -5,17 +5,20 @@ import '../../features/home/presention/pages/add_transaction_page.dart';
 class AppButton extends StatelessWidget {
   final String text;
   final IconData iconButton;
+  final bool isCost;
   const AppButton({
     Key? key,
     required this.text,
     required this.iconButton,
+    required this.isCost,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AddTransactionPage.route);
+        Navigator.pushNamed(context, AddTransactionPage.route, arguments:isCost,);
+
       },
       child: Container(
         height: 40,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/dependency_injection/injection_container.dart';
+import '../controller/home_controller.dart';
 import '../widgets/adaptative_button.dart';
 import '../widgets/adaptative_data_picker.dart';
 import '../widgets/adaptative_text_field.dart';
@@ -14,11 +16,18 @@ class AddTransactionPage extends StatefulWidget {
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
+  late final HomeController controller;
   DateTime selecetedDate = DateTime.now();
-  final _titleController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller = sl<HomeController>();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final RouteSettings args = ModalRoute.of(context)!.settings;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -50,6 +59,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                       width: 300,
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        controller: controller.valueController,
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -108,20 +118,29 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 onDateChanged: (newDate) {
                   setState(() {
                     selecetedDate = newDate;
+                    controller.dateController = newDate;
                   });
                 },
               ),
               AdaptativeTextField(
-                  controller: _titleController,
+                  controller: controller.titleController,
+                  onSubmitted: (_) {}, // _submitForm(),
+                  label: 'Título'),
+              AdaptativeTextField(
+                  controller: controller.descriptionController,
                   onSubmitted: (_) {}, // _submitForm(),
                   label: 'Descrição'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  AdaptativeButton(
-                      'Nova Transação',
-                      // _submitForm,
-                      () {})
+                  AdaptativeButton('Nova Transação', () {
+                    if (args.arguments == true) {
+                      controller.valueController.text =
+                          "-${controller.valueController.text}";
+                    }
+                    controller.saveValues();
+                    Navigator.of(context).pop();
+                  })
                 ],
               ),
             ],

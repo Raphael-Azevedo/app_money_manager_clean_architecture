@@ -54,10 +54,12 @@ class _TransactionPageState extends State<TransactionPage> {
                   AppButton(
                     text: 'Adicionar Entrada',
                     iconButton: Icons.add_circle_outline,
+                    isCost: false,
                   ),
                   AppButton(
                     text: 'Adicionar Gasto',
                     iconButton: Icons.remove_circle_outline,
+                    isCost: true,
                   ),
                 ],
               ),

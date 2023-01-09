@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:money_manager/features/home/domain/usecases/add_transaction.dart';
 import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
 import 'package:money_manager/features/home/domain/usecases/get_year_transaction_list.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
+import '../../data/models/transaction_model.dart';
 import '../../domain/entities/transactions.dart';
 
 part 'home_controller.g.dart';
@@ -15,6 +17,13 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   late final GetMonthTransactionList getMonthTransactionListUseCase;
   late final GetYearTransactionList getYearTransactionListUseCase;
+  late final AddTransaction addTransactionUseCase;
+
+  final valueController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final titleController = TextEditingController();
+  DateTime dateController = DateTime.now();
+  String categoryController = '';
 
   BuildContext? buildContext;
 
@@ -41,7 +50,8 @@ abstract class _HomeControllerBase with Store {
 
   _HomeControllerBase(
       {required this.getMonthTransactionListUseCase,
-      required this.getYearTransactionListUseCase});
+      required this.getYearTransactionListUseCase,
+      required this.addTransactionUseCase});
 
   Future<void> initializeController() async {
     await Future.wait([
@@ -103,5 +113,21 @@ abstract class _HomeControllerBase with Store {
     }
 
     return meses;
+  }
+
+  @action
+  void saveValues() {
+    final requestModel = TransactionModel(
+        value: double.tryParse(valueController.text)!,
+        title: titleController.text,
+        description: descriptionController.text,
+        category: categoryController,
+        date: dateController);
+    addTransactionUseCase(requestModel);
+    valueController.clear();
+    titleController.clear();
+    descriptionController.clear();
+    categoryController = '';
+    dateController = DateTime.now();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:money_manager/features/home/data/datasources/interface/home_remote_datasource.dart';
+import 'package:money_manager/features/home/data/models/transaction_model.dart';
 import 'package:money_manager/features/home/domain/entities/transactions.dart';
 import 'package:money_manager/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -28,6 +29,17 @@ class HomeRepositoryImpl extends HomeRepository {
       final remoteTransactions =
           await remoteDataSource.getYearTransactionList();
       return Right(remoteTransactions);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> addTransaction(
+      TransactionModel params) async {
+    try {
+      final response = await remoteDataSource.addTransaction(params);
+      return Right(response);
     } on ServerException {
       return Left(ServerFailure());
     }
