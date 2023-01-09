@@ -116,7 +116,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   onSubmitted: (_) {}, // _submitForm(),
                   label: 'Descrição'),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   AdaptativeButton(
                       'Nova Transação',

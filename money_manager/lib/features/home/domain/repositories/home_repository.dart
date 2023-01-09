@@ -4,4 +4,5 @@ import 'package:money_manager/features/home/domain/entities/transactions.dart';
 
 abstract class HomeRepository {
   Future<Either<Failure, List<Transaction>>>? getMonthTransactionList();
+  Future<Either<Failure, List<Transaction>>>? getYearTransactionList();
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
+import 'package:money_manager/features/home/domain/usecases/get_year_transaction_list.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
 import '../../domain/entities/transactions.dart';
@@ -12,6 +13,7 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   late final GetMonthTransactionList getMonthTransactionListUseCase;
+  late final GetYearTransactionList getYearTransactionListUseCase;
 
   BuildContext? buildContext;
 
@@ -30,11 +32,17 @@ abstract class _HomeControllerBase with Store {
   @observable
   late List<Transaction> transactionList = [];
 
-  _HomeControllerBase({required this.getMonthTransactionListUseCase});
+  @observable
+  late List<Transaction> allTransactionList = [];
+
+  _HomeControllerBase(
+      {required this.getMonthTransactionListUseCase,
+      required this.getYearTransactionListUseCase});
 
   Future<void> initializeController() async {
     await Future.wait([
       getMonthTransactionList(),
+      getAllTransactions(),
     ]);
   }
 
@@ -51,6 +59,14 @@ abstract class _HomeControllerBase with Store {
           valueCost -= e.value;
         }
       }
+    });
+  }
+
+  @action
+  Future<void> getAllTransactions() async {
+    final result = await getYearTransactionListUseCase(sl());
+    result!.fold((l) {}, (r) {
+      transactionList = ObservableList.of(r);
     });
   }
 }

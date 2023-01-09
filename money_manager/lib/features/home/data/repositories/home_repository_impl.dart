@@ -21,4 +21,15 @@ class HomeRepositoryImpl extends HomeRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Transaction>>>? getYearTransactionList() async {
+    try {
+      final remoteTransactions =
+          await remoteDataSource.getYearTransactionList();
+      return Right(remoteTransactions);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

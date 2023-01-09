@@ -89,6 +89,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$allTransactionListAtom =
+      Atom(name: '_HomeControllerBase.allTransactionList', context: context);
+
+  @override
+  List<Transaction> get allTransactionList {
+    _$allTransactionListAtom.reportRead();
+    return super.allTransactionList;
+  }
+
+  @override
+  set allTransactionList(List<Transaction> value) {
+    _$allTransactionListAtom.reportWrite(value, super.allTransactionList, () {
+      super.allTransactionList = value;
+    });
+  }
+
   late final _$getMonthTransactionListAsyncAction = AsyncAction(
       '_HomeControllerBase.getMonthTransactionList',
       context: context);
@@ -99,6 +115,15 @@ mixin _$HomeController on _HomeControllerBase, Store {
         .run(() => super.getMonthTransactionList());
   }
 
+  late final _$getAllTransactionsAsyncAction =
+      AsyncAction('_HomeControllerBase.getAllTransactions', context: context);
+
+  @override
+  Future<void> getAllTransactions() {
+    return _$getAllTransactionsAsyncAction
+        .run(() => super.getAllTransactions());
+  }
+
   @override
   String toString() {
     return '''
@@ -106,7 +131,8 @@ isBusy: ${isBusy},
 valueTotal: ${valueTotal},
 valueEntrance: ${valueEntrance},
 valueCost: ${valueCost},
-transactionList: ${transactionList}
+transactionList: ${transactionList},
+allTransactionList: ${allTransactionList}
     ''';
   }
 }

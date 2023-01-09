@@ -41,6 +41,16 @@ class MockHomeRemoteDataSource extends _i1.Mock
         returnValue: _i3.Future<List<_i4.TransactionModel>>.value(
             <_i4.TransactionModel>[]),
       ) as _i3.Future<List<_i4.TransactionModel>>);
+  @override
+  _i3.Future<List<_i4.TransactionModel>> getYearTransactionList() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getYearTransactionList,
+          [],
+        ),
+        returnValue: _i3.Future<List<_i4.TransactionModel>>.value(
+            <_i4.TransactionModel>[]),
+      ) as _i3.Future<List<_i4.TransactionModel>>);
 }
 
 /// A class which mocks [HomeRemoteDataSource].
@@ -53,6 +63,18 @@ class MockHomeRemoteDataSourceForTest extends _i1.Mock
       (super.noSuchMethod(
         Invocation.method(
           #getMonthTransactionList,
+          [],
+        ),
+        returnValue: _i3.Future<List<_i4.TransactionModel>>.value(
+            <_i4.TransactionModel>[]),
+        returnValueForMissingStub: _i3.Future<List<_i4.TransactionModel>>.value(
+            <_i4.TransactionModel>[]),
+      ) as _i3.Future<List<_i4.TransactionModel>>);
+  @override
+  _i3.Future<List<_i4.TransactionModel>> getYearTransactionList() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getYearTransactionList,
           [],
         ),
         returnValue: _i3.Future<List<_i4.TransactionModel>>.value(

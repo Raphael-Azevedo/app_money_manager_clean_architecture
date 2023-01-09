@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../controller/home_controller.dart';
+
 class BarChartTransaction extends StatefulWidget {
-  const BarChartTransaction({super.key});
+  final HomeController controller;
+  const BarChartTransaction({required this.controller, super.key});
 
   @override
   State<StatefulWidget> createState() => BarChartTransactionState();
@@ -133,7 +136,7 @@ class BarChartTransactionState extends State<BarChartTransaction> {
               borderData: FlBorderData(
                 show: false,
               ),
-              groupsSpace: 4,
+              groupsSpace: 15,
               barGroups: getData(),
             ),
           ),
@@ -146,7 +149,7 @@ class BarChartTransactionState extends State<BarChartTransaction> {
     return [
       BarChartGroupData(
         x: 0,
-        barsSpace: 4,
+        barsSpace: 8,
         barRods: [
           BarChartRodData(
             toY: 17000000000,
@@ -161,7 +164,7 @@ class BarChartTransactionState extends State<BarChartTransaction> {
       ),
       BarChartGroupData(
         x: 2,
-        barsSpace: 4,
+        barsSpace: 8,
         barRods: [
           BarChartRodData(
             toY: 34000000000,
@@ -172,47 +175,11 @@ class BarChartTransactionState extends State<BarChartTransaction> {
             ],
             borderRadius: BorderRadius.zero,
           ),
-          BarChartRodData(
-            toY: 32000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, dark),
-              BarChartRodStackItem(7000000000, 24000000000, normal),
-              BarChartRodStackItem(24000000000, 32000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 14000000000.5,
-            rodStackItems: [
-              BarChartRodStackItem(0, 1000000000.5, dark),
-              BarChartRodStackItem(1000000000.5, 12000000000, normal),
-              BarChartRodStackItem(12000000000, 14000000000.5, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 20000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 4000000000, dark),
-              BarChartRodStackItem(4000000000000, 15000000000, normal),
-              BarChartRodStackItem(15000000000, 20000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 24000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 4000000000, dark),
-              BarChartRodStackItem(4000000000, 15000000000, normal),
-              BarChartRodStackItem(15000000000, 24000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
         ],
       ),
       BarChartGroupData(
         x: 3,
-        barsSpace: 4,
+        barsSpace: 8,
         barRods: [
           BarChartRodData(
             toY: 14000000000,
@@ -222,43 +189,7 @@ class BarChartTransactionState extends State<BarChartTransaction> {
               BarChartRodStackItem(12000000000, 14000000000, light),
             ],
             borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 27000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, dark),
-              BarChartRodStackItem(7000000000, 25000000000, normal),
-              BarChartRodStackItem(25000000000, 27000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 29000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 6000000000, dark),
-              BarChartRodStackItem(6000000000, 23000000000, normal),
-              BarChartRodStackItem(23000000000, 29000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 16000000000.5,
-            rodStackItems: [
-              BarChartRodStackItem(0, 9000000000, dark),
-              BarChartRodStackItem(9000000000, 15000000000, normal),
-              BarChartRodStackItem(15000000000, 16000000000.5, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
-          BarChartRodData(
-            toY: 15000000000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 7000000000, dark),
-              BarChartRodStackItem(7000000000, 12000000000.5, normal),
-              BarChartRodStackItem(12000000000.5, 15000000000, light),
-            ],
-            borderRadius: BorderRadius.zero,
-          ),
+          )
         ],
       ),
     ];
