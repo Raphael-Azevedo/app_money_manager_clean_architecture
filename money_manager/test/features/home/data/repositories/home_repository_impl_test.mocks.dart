@@ -6,9 +6,9 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:money_manager/features/home/data/datasources/interface/home_remote_datasource.dart'
+import 'package:money_manager/features/transaction/data/datasources/interface/transaction_remote_datasource.dart'
     as _i2;
-import 'package:money_manager/features/home/data/models/transaction_model.dart'
+import 'package:money_manager/features/transaction/data/models/transaction_model.dart'
     as _i4;
 
 // ignore_for_file: type=lint
@@ -22,12 +22,12 @@ import 'package:money_manager/features/home/data/models/transaction_model.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [HomeRemoteDataSource].
+/// A class which mocks [TransactionRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeRemoteDataSource extends _i1.Mock
-    implements _i2.HomeRemoteDataSource {
-  MockHomeRemoteDataSource() {
+class MockTransactionRemoteDataSource extends _i1.Mock
+    implements _i2.TransactionRemoteDataSource {
+  MockTransactionRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -51,13 +51,24 @@ class MockHomeRemoteDataSource extends _i1.Mock
         returnValue: _i3.Future<List<_i4.TransactionModel>>.value(
             <_i4.TransactionModel>[]),
       ) as _i3.Future<List<_i4.TransactionModel>>);
+  @override
+  _i3.Future<Map<String, dynamic>> addTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
 }
 
-/// A class which mocks [HomeRemoteDataSource].
+/// A class which mocks [TransactionRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeRemoteDataSourceForTest extends _i1.Mock
-    implements _i2.HomeRemoteDataSource {
+class mockTransactionRemoteDataSourceForTest extends _i1.Mock
+    implements _i2.TransactionRemoteDataSource {
   @override
   _i3.Future<List<_i4.TransactionModel>> getMonthTransactionList() =>
       (super.noSuchMethod(
@@ -82,4 +93,17 @@ class MockHomeRemoteDataSourceForTest extends _i1.Mock
         returnValueForMissingStub: _i3.Future<List<_i4.TransactionModel>>.value(
             <_i4.TransactionModel>[]),
       ) as _i3.Future<List<_i4.TransactionModel>>);
+  @override
+  _i3.Future<Map<String, dynamic>> addTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+        returnValueForMissingStub:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
 }

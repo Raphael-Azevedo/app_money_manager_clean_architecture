@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:money_manager/features/home/data/models/transaction_model.dart';
-import 'package:money_manager/features/home/domain/entities/transactions.dart';
+import 'package:money_manager/features/transaction/data/models/transaction_model.dart';
+import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

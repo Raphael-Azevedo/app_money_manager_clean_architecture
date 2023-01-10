@@ -1,7 +1,7 @@
-import 'package:money_manager/features/home/data/datasources/interface/home_remote_datasource.dart';
-import 'package:money_manager/features/home/data/models/transaction_model.dart';
+import 'package:money_manager/features/transaction/data/datasources/interface/transaction_remote_datasource.dart';
+import 'package:money_manager/features/transaction/data/models/transaction_model.dart';
 
-class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
+class HomeRemoteDataSourceImpl extends TransactionRemoteDataSource {
   final List<Map<String, dynamic>> response = [
     {
       "Value": -191.90,

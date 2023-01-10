@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 
 class CategoryCard extends StatefulWidget {
   final String cardName;
@@ -15,12 +15,12 @@ class CategoryCard extends StatefulWidget {
 
 class _CategoryCardState extends State<CategoryCard> {
   bool selecionado = false;
-  late final HomeController controller;
+  late final TransactionController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = sl<HomeController>();
+    controller = sl<TransactionController>();
   }
 
   late int valorSelecionado;

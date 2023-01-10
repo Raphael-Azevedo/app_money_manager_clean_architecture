@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 import '../widgets/adaptative_button.dart';
 import '../widgets/adaptative_data_picker.dart';
 import '../widgets/adaptative_text_field.dart';
@@ -16,13 +16,13 @@ class AddTransactionPage extends StatefulWidget {
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
-  late final HomeController controller;
+  late final TransactionController controller;
   DateTime selecetedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    controller = sl<HomeController>();
+    controller = sl<TransactionController>();
   }
 
   @override

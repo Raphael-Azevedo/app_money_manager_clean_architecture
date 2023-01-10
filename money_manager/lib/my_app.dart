@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:money_manager/core/routes/app_routes.dart';
-import 'package:money_manager/features/home/presention/pages/home_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/home_page.dart';
 
 import 'core/helpers/main_material_app.dart';
 

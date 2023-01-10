@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/features/home/presention/pages/add_transaction_page.dart';
-import 'package:money_manager/features/home/presention/pages/transaction_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/add_transaction_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/transaction_page.dart';
 
-import '../../features/home/presention/pages/home_page.dart';
+import '../../features/transaction/presention/pages/home_page.dart';
 
 class AppRoutes {
   static Map<String, PageRouteBuilder> getPagesRoutes(RouteSettings settings) {

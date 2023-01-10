@@ -4,27 +4,28 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:money_manager/core/error/exceptions.dart';
 import 'package:money_manager/core/error/failures.dart';
-import 'package:money_manager/features/home/data/datasources/interface/home_remote_datasource.dart';
-import 'package:money_manager/features/home/data/models/transaction_model.dart';
-import 'package:money_manager/features/home/data/repositories/home_repository_impl.dart';
-import 'package:money_manager/features/home/domain/entities/transactions.dart';
+import 'package:money_manager/features/transaction/data/datasources/interface/transaction_remote_datasource.dart';
+import 'package:money_manager/features/transaction/data/models/transaction_model.dart';
+import 'package:money_manager/features/transaction/data/repositories/transaction_repository_impl.dart';
+import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
 
 import 'home_repository_impl_test.mocks.dart';
 
+
 @GenerateMocks([
-  HomeRemoteDataSource
+  TransactionRemoteDataSource
 ], customMocks: [
-  MockSpec<HomeRemoteDataSource>(
-      as: #MockHomeRemoteDataSourceForTest,
+  MockSpec<TransactionRemoteDataSource>(
+      as: #mockTransactionRemoteDataSourceForTest,
       onMissingStub: OnMissingStub.returnDefault),
 ])
 void main() {
-  late MockHomeRemoteDataSource mockHomeRemoteDataSource;
-  late HomeRepositoryImpl repository;
+  late  MockTransactionRemoteDataSource mockTransactionRemoteDataSource;
+  late TransactionRepositoryImpl repository;
 
   setUp(() {
-    mockHomeRemoteDataSource = MockHomeRemoteDataSource();
-    repository = HomeRepositoryImpl(remoteDataSource: mockHomeRemoteDataSource);
+    mockTransactionRemoteDataSource = MockTransactionRemoteDataSource();
+    repository = TransactionRepositoryImpl(remoteDataSource: mockTransactionRemoteDataSource);
   });
 
   group('getMonthTransactionList', () {
@@ -41,24 +42,24 @@ void main() {
         'should return remote data when the call to remote data source is success',
         () async {
       // arrange
-      when(mockHomeRemoteDataSource.getMonthTransactionList())
+      when(mockTransactionRemoteDataSource.getMonthTransactionList())
           .thenAnswer((_) async => tTransactionModel);
       // act
       final result = await repository.getMonthTransactionList();
       // assert
-      verify(mockHomeRemoteDataSource.getMonthTransactionList());
+      verify(mockTransactionRemoteDataSource.getMonthTransactionList());
       expect(result, equals(Right(tTransaction)));
     });
     test(
         'should return server failure when the call to remote data source is unsuccess',
         () async {
       // arrange
-      when(mockHomeRemoteDataSource.getMonthTransactionList())
+      when(mockTransactionRemoteDataSource.getMonthTransactionList())
           .thenThrow(ServerException());
       // act
       final result = await repository.getMonthTransactionList();
       // assert
-      verify(mockHomeRemoteDataSource.getMonthTransactionList());
+      verify(mockTransactionRemoteDataSource.getMonthTransactionList());
       expect(result, equals(Left(ServerFailure())));
     });
   });

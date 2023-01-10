@@ -1,16 +1,16 @@
-import 'package:money_manager/features/home/data/datasources/interface/home_remote_datasource.dart';
-import 'package:money_manager/features/home/data/models/transaction_model.dart';
-import 'package:money_manager/features/home/domain/entities/transactions.dart';
+import 'package:money_manager/features/transaction/data/datasources/interface/transaction_remote_datasource.dart';
+import 'package:money_manager/features/transaction/data/models/transaction_model.dart';
+import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
 import 'package:money_manager/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:money_manager/features/home/domain/repositories/home_repository.dart';
+import 'package:money_manager/features/transaction/domain/repositories/transaction_repository.dart';
 
 import '../../../../core/error/exceptions.dart';
 
-class HomeRepositoryImpl extends HomeRepository {
-  final HomeRemoteDataSource remoteDataSource;
+class TransactionRepositoryImpl extends TransactionRepository {
+  final TransactionRemoteDataSource remoteDataSource;
 
-  HomeRepositoryImpl({required this.remoteDataSource});
+  TransactionRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, List<Transaction>>>? getMonthTransactionList() async {

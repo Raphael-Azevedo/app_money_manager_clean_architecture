@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifecycle/lifecycle.dart';
-import 'package:money_manager/features/home/presention/pages/transaction_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/transaction_page.dart';
 
 import '../../../../core/common_widgets/app_drawer.dart';
 import '../../../../core/dependency_injection/injection_container.dart';
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 import '../widgets/bottom_navigation.dart';
 import '../widgets/home_card.dart';
 import '../../../../core/common_widgets/list_recent_transactions.dart';
@@ -18,12 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeController controller;
+  late final TransactionController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = sl<HomeController>();
+    controller = sl<TransactionController>();
   }
 
   @override

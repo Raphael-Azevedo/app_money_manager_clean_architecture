@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_controller.dart';
+part of 'transaction_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'home_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$HomeController on _HomeControllerBase, Store {
+mixin _$TransactionController on _TransactionControllerBase, Store {
   late final _$isBusyAtom =
-      Atom(name: '_HomeControllerBase.isBusy', context: context);
+      Atom(name: '_TransactionControllerBase.isBusy', context: context);
 
   @override
   bool get isBusy {
@@ -26,7 +26,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   late final _$valueTotalAtom =
-      Atom(name: '_HomeControllerBase.valueTotal', context: context);
+      Atom(name: '_TransactionControllerBase.valueTotal', context: context);
 
   @override
   double get valueTotal {
@@ -42,7 +42,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   late final _$valueEntranceAtom =
-      Atom(name: '_HomeControllerBase.valueEntrance', context: context);
+      Atom(name: '_TransactionControllerBase.valueEntrance', context: context);
 
   @override
   double get valueEntrance {
@@ -58,7 +58,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   late final _$valueCostAtom =
-      Atom(name: '_HomeControllerBase.valueCost', context: context);
+      Atom(name: '_TransactionControllerBase.valueCost', context: context);
 
   @override
   double get valueCost {
@@ -74,7 +74,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   late final _$chartBarAtom =
-      Atom(name: '_HomeControllerBase.chartBar', context: context);
+      Atom(name: '_TransactionControllerBase.chartBar', context: context);
 
   @override
   Map<String, dynamic> get chartBar {
@@ -89,8 +89,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  late final _$transactionListAtom =
-      Atom(name: '_HomeControllerBase.transactionList', context: context);
+  late final _$transactionListAtom = Atom(
+      name: '_TransactionControllerBase.transactionList', context: context);
 
   @override
   List<Transaction> get transactionList {
@@ -105,8 +105,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  late final _$allTransactionListAtom =
-      Atom(name: '_HomeControllerBase.allTransactionList', context: context);
+  late final _$allTransactionListAtom = Atom(
+      name: '_TransactionControllerBase.allTransactionList', context: context);
 
   @override
   List<Transaction> get allTransactionList {
@@ -122,7 +122,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   late final _$getMonthTransactionListAsyncAction = AsyncAction(
-      '_HomeControllerBase.getMonthTransactionList',
+      '_TransactionControllerBase.getMonthTransactionList',
       context: context);
 
   @override
@@ -131,13 +131,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
         .run(() => super.getMonthTransactionList());
   }
 
-  late final _$getAllTransactionsAsyncAction =
-      AsyncAction('_HomeControllerBase.getAllTransactions', context: context);
+  late final _$getAllTransactionsAsyncAction = AsyncAction(
+      '_TransactionControllerBase.getAllTransactions',
+      context: context);
 
   @override
   Future<void> getAllTransactions() {
     return _$getAllTransactionsAsyncAction
         .run(() => super.getAllTransactions());
+  }
+
+  late final _$_TransactionControllerBaseActionController =
+      ActionController(name: '_TransactionControllerBase', context: context);
+
+  @override
+  void saveValues() {
+    final _$actionInfo = _$_TransactionControllerBaseActionController
+        .startAction(name: '_TransactionControllerBase.saveValues');
+    try {
+      return super.saveValues();
+    } finally {
+      _$_TransactionControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

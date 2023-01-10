@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lifecycle/lifecycle.dart';
-import 'package:money_manager/features/home/presention/widgets/bar_chart_transaction.dart';
+import 'package:money_manager/features/transaction/presention/widgets/bar_chart_transaction.dart';
 import 'package:money_manager/core/common_widgets/list_recent_transactions.dart';
-import 'package:money_manager/features/home/presention/widgets/segmented_control_transaction.dart';
+import 'package:money_manager/features/transaction/presention/widgets/segmented_control_transaction.dart';
 
 import '../../../../core/common_widgets/app_drawer.dart';
 import '../../../../core/dependency_injection/injection_container.dart';
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 import '../../../../core/common_widgets/app_button.dart';
 import '../widgets/bottom_navigation.dart';
 
@@ -19,17 +19,22 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  late final HomeController controller;
+  late final TransactionController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = sl<HomeController>();
+    controller = sl<TransactionController>();
   }
 
   @override
   Widget build(BuildContext context) {
     controller.buildContext = context;
+    List<Tuple2<Color, String>> items = [
+      Tuple2(const Color.fromRGBO(168, 47, 225, 1), "Gastos"),
+      Tuple2(const Color.fromARGB(253, 86, 74, 202), "Entrada"),
+      Tuple2(const Color.fromARGB(255, 21, 123, 170), "Total"),
+    ];
 
     return LifecycleWrapper(
       onLifecycleEvent: (event) async {
@@ -67,8 +72,25 @@ class _TransactionPageState extends State<TransactionPage> {
               SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: BarChartTransaction(controller: controller)),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: items.map((item) {
+                  return Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 8,
+                        backgroundColor: item.item1,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(item.item2),
+                    ],
+                  );
+                }).toList(),
+              ),
               const SizedBox(height: 30),
               const SegmentedControlTransaction(currentSelection: 0),
+              const SizedBox(height: 20),
               RecentTransactions(false, controller: controller),
             ],
           ),
@@ -84,4 +106,11 @@ class _TransactionPageState extends State<TransactionPage> {
       ),
     );
   }
+}
+
+class Tuple2<A, B> {
+  final A item1;
+  final B item2;
+
+  Tuple2(this.item1, this.item2);
 }

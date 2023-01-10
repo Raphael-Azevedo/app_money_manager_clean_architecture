@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 
 class HomeCard extends StatefulWidget {
-  final HomeController controller;
+  final TransactionController controller;
 
   const HomeCard({required this.controller,
     Key? key,

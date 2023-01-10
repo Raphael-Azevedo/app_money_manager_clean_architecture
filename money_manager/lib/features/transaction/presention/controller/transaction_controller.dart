@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:money_manager/features/home/domain/usecases/add_transaction.dart';
-import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
-import 'package:money_manager/features/home/domain/usecases/get_year_transaction_list.dart';
+import 'package:money_manager/features/transaction/domain/usecases/add_transaction.dart';
+import 'package:money_manager/features/transaction/domain/usecases/get_month_transaction_list.dart';
+import 'package:money_manager/features/transaction/domain/usecases/get_year_transaction_list.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
 import '../../data/models/transaction_model.dart';
 import '../../domain/entities/transactions.dart';
 
-part 'home_controller.g.dart';
+part 'transaction_controller.g.dart';
 
 // ignore: library_private_types_in_public_api
-class HomeController = _HomeControllerBase with _$HomeController;
+class TransactionController = _TransactionControllerBase
+    with _$TransactionController;
 
-abstract class _HomeControllerBase with Store {
+abstract class _TransactionControllerBase with Store {
   late final GetMonthTransactionList getMonthTransactionListUseCase;
   late final GetYearTransactionList getYearTransactionListUseCase;
   late final AddTransaction addTransactionUseCase;
@@ -48,7 +49,7 @@ abstract class _HomeControllerBase with Store {
   @observable
   late List<Transaction> allTransactionList = [];
 
-  _HomeControllerBase(
+  _TransactionControllerBase(
       {required this.getMonthTransactionListUseCase,
       required this.getYearTransactionListUseCase,
       required this.addTransactionUseCase});

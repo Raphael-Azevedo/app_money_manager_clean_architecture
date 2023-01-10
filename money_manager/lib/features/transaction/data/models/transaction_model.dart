@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:money_manager/features/home/domain/entities/transactions.dart';
+import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
 
 part 'transaction_model.g.dart';
 

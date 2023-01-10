@@ -3,21 +3,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:money_manager/core/usecases/usecase.dart';
-import 'package:money_manager/features/home/domain/entities/transactions.dart';
-import 'package:money_manager/features/home/domain/repositories/home_repository.dart';
-import 'package:money_manager/features/home/domain/usecases/get_month_transaction_list.dart';
+import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
+import 'package:money_manager/features/transaction/domain/repositories/transaction_repository.dart';
+import 'package:money_manager/features/transaction/domain/usecases/get_month_transaction_list.dart';
 
 import 'get_month_transaction_list_test.mocks.dart';
 
-@GenerateMocks([HomeRepository])
+@GenerateMocks([TransactionRepository])
 void main() {
-  late MockHomeRepository mockHomeRepository;
+  late MockTransactionRepository mockTransactionRepository;
   late GetMonthTransactionList usecase;
   late List<Transaction> tTransaction;
 
   setUp(() {
-    mockHomeRepository = MockHomeRepository();
-    usecase = GetMonthTransactionList(mockHomeRepository);
+    mockTransactionRepository = MockTransactionRepository();
+    usecase = GetMonthTransactionList(mockTransactionRepository);
     tTransaction = [Transaction(
       value: 1.0,
       title: 'test',
@@ -31,14 +31,14 @@ void main() {
     'should get transaction list from the repository',
     () async {
       // arrange
-      when(mockHomeRepository.getMonthTransactionList())
+      when(mockTransactionRepository.getMonthTransactionList())
           .thenAnswer((_) async => Right(tTransaction));
       // act
       final result = await usecase(NoParams());
       // assert
       expect(result, equals(Right(tTransaction)));
-      verify(mockHomeRepository.getMonthTransactionList());
-      verifyNoMoreInteractions(mockHomeRepository);
+      verify(mockTransactionRepository.getMonthTransactionList());
+      verifyNoMoreInteractions(mockTransactionRepository);
     },
   );
 }

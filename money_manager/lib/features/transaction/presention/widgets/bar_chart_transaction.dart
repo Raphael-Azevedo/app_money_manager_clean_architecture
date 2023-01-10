@@ -1,10 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../controller/home_controller.dart';
+import '../controller/transaction_controller.dart';
 
 class BarChartTransaction extends StatefulWidget {
-  final HomeController controller;
+  final TransactionController controller;
   const BarChartTransaction({required this.controller, super.key});
 
   @override
@@ -147,6 +147,7 @@ class BarChartTransactionState extends State<BarChartTransaction> {
 
   List<BarChartGroupData> getData() {
     List<BarChartGroupData> data = [];
+
     List<String> months = [
       "January",
       "February",

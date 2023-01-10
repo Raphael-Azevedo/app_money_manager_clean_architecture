@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/features/home/presention/pages/home_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/home_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({

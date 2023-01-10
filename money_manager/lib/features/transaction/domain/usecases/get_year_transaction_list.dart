@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../entities/transactions.dart';
-import '../repositories/home_repository.dart';
+import '../repositories/transaction_repository.dart';
 
 class GetYearTransactionList implements UseCase<Transaction, NoParams> {
-  final HomeRepository repository;
+  final TransactionRepository repository;
 
   GetYearTransactionList(this.repository);
 

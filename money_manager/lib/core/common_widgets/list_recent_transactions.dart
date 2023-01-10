@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
-import '../../features/home/presention/controller/home_controller.dart';
+import '../../features/transaction/presention/controller/transaction_controller.dart';
 
 class RecentTransactions extends StatefulWidget {
-  final HomeController controller;
+  final TransactionController controller;
   final bool isHome;
   const RecentTransactions(this.isHome, {required this.controller, super.key});
 
