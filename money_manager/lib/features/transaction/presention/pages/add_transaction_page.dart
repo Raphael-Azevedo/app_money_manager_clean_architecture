@@ -17,8 +17,9 @@ class AddTransactionPage extends StatefulWidget {
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
   late final TransactionController controller;
-  late final RouteSettings args;
   DateTime selecetedDate = DateTime.now();
+  final _formKey = GlobalKey<FormState>();
+
   final categories = [
     {'name': 'Moradia', 'icon': Icons.home},
     {'name': 'Lanche', 'icon': Icons.fastfood_rounded},
@@ -39,13 +40,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    args = ModalRoute.of(context)!.settings;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final RouteSettings args = ModalRoute.of(context)!.settings;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -59,100 +55,112 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 35),
-                child: Row(
-                  children: [
-                    Text(
-                      '\$',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    Container(
-                      width: 300,
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: controller.valueController,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 35),
+                  child: Row(
+                    children: [
+                      Text(
+                        '\$',
                         style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      Container(
+                        width: 300,
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: controller.valueController,
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          decoration:
+                              const InputDecoration.collapsed(hintText: '0.00'),
+                          validator: (value) {
+                            if (value == "" || value == null) {
+                              return 'Este campo é obrigatório!';
+                            }
+                            return null;
+                          },
                         ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        decoration:
-                            const InputDecoration.collapsed(hintText: '0.00'),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    'Selecione a Categoria',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 45,
+                      child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(width: 5);
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categories.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CategoryCard(
+                              cardName: categories[index]['name'].toString(),
+                              iconButton:
+                                  categories[index]['icon'] as IconData);
+                        },
                       ),
                     ),
                   ],
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child: Text(
-                  'Selecione a Categoria',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+                AdaptativeDataPicker(
+                  selecetedDate: selecetedDate,
+                  onDateChanged: (newDate) {
+                    setState(() {
+                      selecetedDate = newDate;
+                      controller.dateController = newDate;
+                    });
+                  },
                 ),
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: 45,
-                    child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(width: 5);
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categories.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CategoryCard(
-                            cardName: categories[index]['name'].toString(),
-                            iconButton: categories[index]['icon'] as IconData);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              AdaptativeDataPicker(
-                selecetedDate: selecetedDate,
-                onDateChanged: (newDate) {
-                  setState(() {
-                    selecetedDate = newDate;
-                    controller.dateController = newDate;
-                  });
-                },
-              ),
-              AdaptativeTextField(
-                  controller: controller.titleController,
-                  onSubmitted: (_) {},
-                  label: 'Título'),
-              AdaptativeTextField(
-                  controller: controller.descriptionController,
-                  onSubmitted: (_) {},
-                  label: 'Descrição'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  AdaptativeButton('Nova Transação', () {
-                    if (args.arguments == true) {
-                      controller.valueController.text =
-                          "-${controller.valueController.text}";
-                    }
-                    controller.saveValues();
-                    Navigator.of(context).pop();
-                  })
-                ],
-              ),
-            ],
+                AdaptativeTextField(
+                    controller: controller.titleController, label: 'Título'),
+                AdaptativeTextField(
+                    controller: controller.descriptionController,
+                    label: 'Descrição'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    AdaptativeButton('Nova Transação', () {
+                      if (args.arguments == true) {
+                        controller.valueController.text =
+                            "-${controller.valueController.text}";
+                      }
+                      final isValid =
+                          _formKey.currentState?.validate() ?? false;
+                      if (!isValid) {
+                        return;
+                      }
+                      controller.saveValues();
+                      Navigator.of(context).pop();
+                    })
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

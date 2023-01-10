@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifecycle/lifecycle.dart';
 import 'package:money_manager/features/transaction/presention/pages/transaction_page.dart';
 
 import '../../../../core/common_widgets/app_drawer.dart';

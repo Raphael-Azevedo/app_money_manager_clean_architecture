@@ -6,13 +6,11 @@ class AdaptativeTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final Function(String) onSubmitted;
 
   const AdaptativeTextField(
       {super.key,
       required this.controller,
       this.keyboardType = TextInputType.text,
-      required this.onSubmitted,
       required this.label});
 
   @override
@@ -25,7 +23,6 @@ class AdaptativeTextField extends StatelessWidget {
             child: CupertinoTextField(
               controller: controller,
               keyboardType: keyboardType,
-              onSubmitted: onSubmitted,
               placeholder: label,
               padding: const EdgeInsets.symmetric(
                 horizontal: 6,
@@ -37,11 +34,16 @@ class AdaptativeTextField extends StatelessWidget {
             padding: const EdgeInsets.only(
               bottom: 20,
             ),
-            child: TextField(
+            child: TextFormField(
               controller: controller,
               keyboardType: keyboardType,
-              onSubmitted: onSubmitted,
               decoration: InputDecoration(labelText: label),
+                                      validator: (value) {
+                          if (value == "" || value == null) {
+                            return 'Este campo é obrigatório!';
+                          }
+                          return null;
+                        },
             ),
           );
   }
