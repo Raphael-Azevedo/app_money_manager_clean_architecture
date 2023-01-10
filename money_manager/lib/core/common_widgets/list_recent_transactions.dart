@@ -43,7 +43,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
             builder: ((_) {
               widget.isHome
                   ? (transactions = widget.controller.transactionList)
-                  : (transactions = widget.controller.allTransactionList);
+                  : (transactions = widget.controller.filteredList);
               return SizedBox(
                 height: 450,
                 child: ListView.builder(

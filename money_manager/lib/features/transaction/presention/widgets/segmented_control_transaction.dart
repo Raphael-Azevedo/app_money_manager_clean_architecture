@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
+import '../controller/transaction_controller.dart';
+
 class SegmentedControlTransaction extends StatefulWidget {
   final int currentSelection;
+  final TransactionController controller;
   const SegmentedControlTransaction(
-      {super.key, required this.currentSelection});
+      {super.key, required this.currentSelection, required this.controller});
 
   @override
   State<SegmentedControlTransaction> createState() =>
@@ -19,6 +22,7 @@ class _SegmentedControlTransactionState
   void initState() {
     super.initState();
     _currentSelection = widget.currentSelection;
+    widget.controller.updatedListTransaction(_currentSelection);
   }
 
   final Map<int, Widget> _children = {
@@ -50,6 +54,7 @@ class _SegmentedControlTransactionState
       onSegmentChosen: (index) {
         setState(() {
           _currentSelection = index;
+          widget.controller.updatedListTransaction(_currentSelection);
         });
       },
     );

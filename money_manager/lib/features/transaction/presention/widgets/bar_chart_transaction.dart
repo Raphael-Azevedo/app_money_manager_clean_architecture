@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../controller/transaction_controller.dart';
 
@@ -87,62 +88,64 @@ class BarChartTransactionState extends State<BarChartTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.66,
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 16),
-          child: BarChart(
-            BarChartData(
-              alignment: BarChartAlignment.center,
-              barTouchData: BarTouchData(
-                enabled: false,
-              ),
-              titlesData: FlTitlesData(
-                show: true,
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    reservedSize: 28,
-                    getTitlesWidget: bottomTitles,
+    return Observer(
+        builder: (_) => AspectRatio(
+              aspectRatio: 1.66,
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6)),
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: BarChart(
+                    BarChartData(
+                      alignment: BarChartAlignment.center,
+                      barTouchData: BarTouchData(
+                        enabled: false,
+                      ),
+                      titlesData: FlTitlesData(
+                        show: true,
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 28,
+                            getTitlesWidget: bottomTitles,
+                          ),
+                        ),
+                        leftTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 40,
+                            getTitlesWidget: leftTitles,
+                          ),
+                        ),
+                        topTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        rightTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                      ),
+                      gridData: FlGridData(
+                        show: true,
+                        checkToShowHorizontalLine: (value) => value % 10 == 0,
+                        getDrawingHorizontalLine: (value) => FlLine(
+                          color: const Color(0xffe7e8ec),
+                          strokeWidth: 1,
+                        ),
+                        drawVerticalLine: false,
+                      ),
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      groupsSpace: 15,
+                      barGroups: getData(),
+                    ),
                   ),
                 ),
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    reservedSize: 40,
-                    getTitlesWidget: leftTitles,
-                  ),
-                ),
-                topTitles: AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                rightTitles: AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
               ),
-              gridData: FlGridData(
-                show: true,
-                checkToShowHorizontalLine: (value) => value % 10 == 0,
-                getDrawingHorizontalLine: (value) => FlLine(
-                  color: const Color(0xffe7e8ec),
-                  strokeWidth: 1,
-                ),
-                drawVerticalLine: false,
-              ),
-              borderData: FlBorderData(
-                show: false,
-              ),
-              groupsSpace: 15,
-              barGroups: getData(),
-            ),
-          ),
-        ),
-      ),
-    );
+            ));
   }
 
   List<BarChartGroupData> getData() {

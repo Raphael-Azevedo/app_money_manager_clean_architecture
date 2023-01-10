@@ -9,6 +9,38 @@ part of 'transaction_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TransactionController on _TransactionControllerBase, Store {
+  late final _$filteredListAtom =
+      Atom(name: '_TransactionControllerBase.filteredList', context: context);
+
+  @override
+  List<dynamic> get filteredList {
+    _$filteredListAtom.reportRead();
+    return super.filteredList;
+  }
+
+  @override
+  set filteredList(List<dynamic> value) {
+    _$filteredListAtom.reportWrite(value, super.filteredList, () {
+      super.filteredList = value;
+    });
+  }
+
+  late final _$selectedFilterAtom =
+      Atom(name: '_TransactionControllerBase.selectedFilter', context: context);
+
+  @override
+  int get selectedFilter {
+    _$selectedFilterAtom.reportRead();
+    return super.selectedFilter;
+  }
+
+  @override
+  set selectedFilter(int value) {
+    _$selectedFilterAtom.reportWrite(value, super.selectedFilter, () {
+      super.selectedFilter = value;
+    });
+  }
+
   late final _$isBusyAtom =
       Atom(name: '_TransactionControllerBase.isBusy', context: context);
 
@@ -156,8 +188,21 @@ mixin _$TransactionController on _TransactionControllerBase, Store {
   }
 
   @override
+  void updatedListTransaction(int filter) {
+    final _$actionInfo = _$_TransactionControllerBaseActionController
+        .startAction(name: '_TransactionControllerBase.updatedListTransaction');
+    try {
+      return super.updatedListTransaction(filter);
+    } finally {
+      _$_TransactionControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+filteredList: ${filteredList},
+selectedFilter: ${selectedFilter},
 isBusy: ${isBusy},
 valueTotal: ${valueTotal},
 valueEntrance: ${valueEntrance},

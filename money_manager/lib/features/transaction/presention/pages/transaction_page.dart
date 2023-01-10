@@ -36,6 +36,10 @@ class _TransactionPageState extends State<TransactionPage> {
       Tuple2(const Color.fromARGB(255, 21, 123, 170), "Total"),
     ];
 
+    Future<void> refreshTransactions(BuildContext context) async {
+      return controller.filterTransactions();
+    }
+
     return LifecycleWrapper(
       onLifecycleEvent: (event) async {
         if (event == LifecycleEvent.visible) {
@@ -47,52 +51,56 @@ class _TransactionPageState extends State<TransactionPage> {
           title: const Text('Transações'),
         ),
         drawer: const AppDrawer(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 25,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  AppButton(
-                    text: 'Adicionar Entrada',
-                    iconButton: Icons.add_circle_outline,
-                    isCost: false,
-                  ),
-                  AppButton(
-                    text: 'Adicionar Gasto',
-                    iconButton: Icons.remove_circle_outline,
-                    isCost: true,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: BarChartTransaction(controller: controller)),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: items.map((item) {
-                  return Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 8,
-                        backgroundColor: item.item1,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(item.item2),
-                    ],
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 30),
-              const SegmentedControlTransaction(currentSelection: 0),
-              const SizedBox(height: 20),
-              RecentTransactions(false, controller: controller),
-            ],
+        body: RefreshIndicator(
+          onRefresh: () => refreshTransactions(context),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [
+                    AppButton(
+                      text: 'Adicionar Entrada',
+                      iconButton: Icons.add_circle_outline,
+                      isCost: false,
+                    ),
+                    AppButton(
+                      text: 'Adicionar Gasto',
+                      iconButton: Icons.remove_circle_outline,
+                      isCost: true,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: BarChartTransaction(controller: controller)),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: items.map((item) {
+                    return Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 8,
+                          backgroundColor: item.item1,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(item.item2),
+                      ],
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 30),
+                SegmentedControlTransaction(
+                    currentSelection: 0, controller: controller),
+                const SizedBox(height: 20),
+                RecentTransactions(false, controller: controller),
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(

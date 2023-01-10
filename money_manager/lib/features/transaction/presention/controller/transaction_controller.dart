@@ -20,6 +20,11 @@ abstract class _TransactionControllerBase with Store {
   late final GetYearTransactionList getYearTransactionListUseCase;
   late final AddTransaction addTransactionUseCase;
 
+  _TransactionControllerBase(
+      {required this.getMonthTransactionListUseCase,
+      required this.getYearTransactionListUseCase,
+      required this.addTransactionUseCase});
+
   final valueController = TextEditingController();
   final descriptionController = TextEditingController();
   final titleController = TextEditingController();
@@ -27,6 +32,12 @@ abstract class _TransactionControllerBase with Store {
   String categoryController = '';
 
   BuildContext? buildContext;
+
+  @observable
+  List filteredList = [];
+
+  @observable
+  int selectedFilter = 0;
 
   @observable
   bool isBusy = false;
@@ -48,18 +59,6 @@ abstract class _TransactionControllerBase with Store {
 
   @observable
   late List<Transaction> allTransactionList = [];
-
-  _TransactionControllerBase(
-      {required this.getMonthTransactionListUseCase,
-      required this.getYearTransactionListUseCase,
-      required this.addTransactionUseCase});
-
-  Future<void> initializeController() async {
-    await Future.wait([
-      getMonthTransactionList(),
-      getAllTransactions(),
-    ]);
-  }
 
   @action
   Future<void> getMonthTransactionList() async {
@@ -117,18 +116,55 @@ abstract class _TransactionControllerBase with Store {
   }
 
   @action
-  void saveValues() {
+  void saveValues() async {
     final requestModel = TransactionModel(
         value: double.tryParse(valueController.text)!,
         title: titleController.text,
         description: descriptionController.text,
         category: categoryController,
         date: dateController);
-    addTransactionUseCase(requestModel);
+    await addTransactionUseCase(requestModel);
+    clearController();
+  }
+
+  @action
+  void updatedListTransaction(int filter) {
+    selectedFilter = filter;
+    filterTransactions();
+  }
+
+  void clearController() {
     valueController.clear();
     titleController.clear();
     descriptionController.clear();
     categoryController = '';
     dateController = DateTime.now();
+  }
+
+  void filterTransactions() {
+    switch (selectedFilter) {
+      case 0: // ano
+        filteredList = allTransactionList
+            .where((t) => t.date.year == DateTime.now().year)
+            .toList();
+        break;
+      case 1: // mês
+        filteredList = allTransactionList
+            .where((t) => t.date.month == DateTime.now().month)
+            .toList();
+        break;
+      case 2: // dia
+        filteredList = allTransactionList
+            .where((t) => t.date.day == DateTime.now().day)
+            .toList();
+        break;
+    }
+  }
+
+  Future<void> initializeController() async {
+    await Future.wait([
+      getMonthTransactionList(),
+      getAllTransactions(),
+    ]);
   }
 }

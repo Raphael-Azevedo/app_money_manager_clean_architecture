@@ -39,6 +39,25 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     controller = sl<TransactionController>();
   }
 
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ocorreu um Erro'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () {
+              controller.clearController();
+              Navigator.of(context).pop();
+            },
+            child: const Text('Fechar'),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final RouteSettings args = ModalRoute.of(context)!.settings;
@@ -145,17 +164,21 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     AdaptativeButton('Nova Transação', () {
-                      if (args.arguments == true) {
-                        controller.valueController.text =
-                            "-${controller.valueController.text}";
+                      try {
+                        if (args.arguments == true) {
+                          controller.valueController.text =
+                              "-${controller.valueController.text}";
+                        }
+                        final isValid =
+                            _formKey.currentState?.validate() ?? false;
+                        if (!isValid) {
+                          return;
+                        }
+                        controller.saveValues();
+                        Navigator.of(context).pop();
+                      } catch (error) {
+                        _showErrorDialog('Ocorreu um erro inesperado');
                       }
-                      final isValid =
-                          _formKey.currentState?.validate() ?? false;
-                      if (!isValid) {
-                        return;
-                      }
-                      controller.saveValues();
-                      Navigator.of(context).pop();
                     })
                   ],
                 ),
