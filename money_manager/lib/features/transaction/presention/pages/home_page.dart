@@ -24,43 +24,37 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     controller = sl<TransactionController>();
+    controller.initializeController();
   }
 
   @override
   Widget build(BuildContext context) {
     controller.buildContext = context;
 
-    return LifecycleWrapper(
-      onLifecycleEvent: (event) async {
-        if (event == LifecycleEvent.visible) {
-          await controller.initializeController();
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Despesas Pessoais'),
-        ),
-        drawer: const AppDrawer(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              HomeCard(controller: controller),
-              const SizedBox(height: 20),
-              RecentTransactions(true, controller: controller),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, TransactionPage.route);
-          },
-          shape: const CircleBorder(),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: const BottomNavigation(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Despesas Pessoais'),
       ),
+      drawer: const AppDrawer(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HomeCard(controller: controller),
+            const SizedBox(height: 20),
+            RecentTransactions(true, controller: controller),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, TransactionPage.route);
+        },
+        shape: const CircleBorder(),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

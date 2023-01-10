@@ -17,7 +17,20 @@ class AddTransactionPage extends StatefulWidget {
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
   late final TransactionController controller;
+  late final RouteSettings args;
   DateTime selecetedDate = DateTime.now();
+  final categories = [
+    {'name': 'Moradia', 'icon': Icons.home},
+    {'name': 'Lanche', 'icon': Icons.fastfood_rounded},
+    {'name': 'Alimentação', 'icon': Icons.restaurant},
+    {'name': 'Transporte', 'icon': Icons.train},
+    {'name': 'Vestuário', 'icon': Icons.shopify_rounded},
+    {'name': 'Saúde', 'icon': Icons.favorite},
+    {'name': 'Lazer', 'icon': Icons.pedal_bike_rounded},
+    {'name': 'Educação', 'icon': Icons.menu_book_outlined},
+    {'name': 'Segurança', 'icon': Icons.security},
+    {'name': 'Outros', 'icon': Icons.work_outline_sharp},
+  ];
 
   @override
   void initState() {
@@ -26,8 +39,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    args = ModalRoute.of(context)!.settings;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final RouteSettings args = ModalRoute.of(context)!.settings;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -84,34 +102,25 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    CategoryCard(cardName: 'Moradia', iconButton: Icons.home),
-                    CategoryCard(
-                        cardName: 'Lanche', iconButton: Icons.fastfood_rounded),
-                    CategoryCard(
-                        cardName: 'Alimentação', iconButton: Icons.restaurant),
-                    CategoryCard(
-                        cardName: 'Transporte', iconButton: Icons.train),
-                    CategoryCard(
-                        cardName: 'Vestuário',
-                        iconButton: Icons.shopify_rounded),
-                    CategoryCard(cardName: 'Saúde', iconButton: Icons.favorite),
-                    CategoryCard(
-                        cardName: 'Lazer',
-                        iconButton: Icons.pedal_bike_rounded),
-                    CategoryCard(
-                        cardName: 'Educação',
-                        iconButton: Icons.menu_book_outlined),
-                    CategoryCard(
-                        cardName: 'Segurança', iconButton: Icons.security),
-                    CategoryCard(
-                        cardName: 'Outros',
-                        iconButton: Icons.work_outline_sharp),
-                  ],
-                ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 45,
+                    child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(width: 5);
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CategoryCard(
+                            cardName: categories[index]['name'].toString(),
+                            iconButton: categories[index]['icon'] as IconData);
+                      },
+                    ),
+                  ),
+                ],
               ),
               AdaptativeDataPicker(
                 selecetedDate: selecetedDate,
@@ -124,11 +133,11 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               ),
               AdaptativeTextField(
                   controller: controller.titleController,
-                  onSubmitted: (_) {}, // _submitForm(),
+                  onSubmitted: (_) {},
                   label: 'Título'),
               AdaptativeTextField(
                   controller: controller.descriptionController,
-                  onSubmitted: (_) {}, // _submitForm(),
+                  onSubmitted: (_) {},
                   label: 'Descrição'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
