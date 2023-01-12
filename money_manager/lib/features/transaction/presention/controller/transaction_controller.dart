@@ -65,6 +65,7 @@ abstract class _TransactionControllerBase with Store {
     final result = await getMonthTransactionListUseCase(sl());
     result!.fold((l) {}, (r) {
       transactionList = ObservableList.of(r);
+      transactionList.sort((a, b) => b.date.compareTo(a.date));
       valueTotal = 0;
       valueEntrance = 0;
       valueCost = 0;
@@ -84,6 +85,7 @@ abstract class _TransactionControllerBase with Store {
     final result = await getYearTransactionListUseCase(sl());
     result!.fold((l) {}, (r) {
       allTransactionList = ObservableList.of(r);
+      allTransactionList.sort((a, b) => b.date.compareTo(a.date));
       chartBar = {};
       chartBar = _agroupTransactionsPerMes(allTransactionList, chartBar);
     });

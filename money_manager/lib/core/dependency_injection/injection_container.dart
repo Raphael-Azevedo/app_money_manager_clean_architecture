@@ -9,6 +9,7 @@ import 'package:money_manager/features/transaction/domain/usecases/get_month_tra
 import 'package:money_manager/features/transaction/presention/controller/transaction_controller.dart';
 import 'package:money_manager/features/transaction/presention/pages/add_transaction_page.dart';
 import 'package:money_manager/features/transaction/presention/pages/transaction_page.dart';
+import 'package:money_manager/features/transaction/presention/pages/update_transaction_page.dart';
 
 import '../../features/transaction/domain/usecases/get_year_transaction_list.dart';
 import '../../features/transaction/presention/pages/home_page.dart';
@@ -36,4 +37,5 @@ Future<void> init() async {
   sl.registerFactory(() => const HomePage());
   sl.registerFactory(() => const TransactionPage());
   sl.registerFactory(() => const AddTransactionPage());
+  sl.registerFactory(() => const UpdateTransactionPage());
 }
