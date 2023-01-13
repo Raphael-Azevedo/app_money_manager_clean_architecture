@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:money_manager/features/transaction/presention/widgets/modal_bottom_sheet.dart';
 
 import '../../features/transaction/presention/controller/transaction_controller.dart';
-import '../../features/transaction/presention/pages/update_transaction_page.dart';
 
 class RecentTransactions extends StatefulWidget {
   final TransactionController controller;
@@ -21,7 +21,17 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, UpdateTransactionPage.route);
+        showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(25.0),
+            ),
+          ),
+          context: context,
+          builder: (BuildContext context) {
+            return const ModalBottomSheet();
+          },
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(top: 20),
@@ -79,7 +89,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                                 builder: ((ctx) => AlertDialog(
                                       title: const Text('Tem Certeza?'),
                                       content: const Text(
-                                          'Quer remover o item do carrinho?'),
+                                          'Quer remover a Transação?'),
                                       actions: [
                                         TextButton(
                                           onPressed: () {
