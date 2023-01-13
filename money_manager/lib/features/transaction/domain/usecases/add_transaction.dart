@@ -14,6 +14,7 @@ class AddTransaction implements UseCaseSingle<Transaction, TransactionModel> {
   @override
   Future<Either<Failure, Map<String, dynamic>>?> call(params) async {
     final requestModel = TransactionModel(
+      id: params.id,
         value: params.value,
         title: params.title,
         description: params.description,

@@ -173,19 +173,16 @@ mixin _$TransactionController on _TransactionControllerBase, Store {
         .run(() => super.getAllTransactions());
   }
 
-  late final _$_TransactionControllerBaseActionController =
-      ActionController(name: '_TransactionControllerBase', context: context);
+  late final _$saveValuesAsyncAction =
+      AsyncAction('_TransactionControllerBase.saveValues', context: context);
 
   @override
-  void saveValues() {
-    final _$actionInfo = _$_TransactionControllerBaseActionController
-        .startAction(name: '_TransactionControllerBase.saveValues');
-    try {
-      return super.saveValues();
-    } finally {
-      _$_TransactionControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future saveValues() {
+    return _$saveValuesAsyncAction.run(() => super.saveValues());
   }
+
+  late final _$_TransactionControllerBaseActionController =
+      ActionController(name: '_TransactionControllerBase', context: context);
 
   @override
   void updatedListTransaction(int filter) {

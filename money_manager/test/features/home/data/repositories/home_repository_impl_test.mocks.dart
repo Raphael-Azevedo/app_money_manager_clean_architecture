@@ -62,6 +62,28 @@ class MockTransactionRemoteDataSource extends _i1.Mock
         returnValue:
             _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
       ) as _i3.Future<Map<String, dynamic>>);
+  @override
+  _i3.Future<Map<String, dynamic>> updateTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
+  @override
+  _i3.Future<Map<String, dynamic>> deleteTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
 }
 
 /// A class which mocks [TransactionRemoteDataSource].
@@ -99,6 +121,32 @@ class mockTransactionRemoteDataSourceForTest extends _i1.Mock
       (super.noSuchMethod(
         Invocation.method(
           #addTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+        returnValueForMissingStub:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
+  @override
+  _i3.Future<Map<String, dynamic>> updateTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateTransaction,
+          [params],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+        returnValueForMissingStub:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
+  @override
+  _i3.Future<Map<String, dynamic>> deleteTransaction(
+          _i4.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTransaction,
           [params],
         ),
         returnValue:

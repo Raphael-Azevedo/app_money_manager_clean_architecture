@@ -118,8 +118,9 @@ abstract class _TransactionControllerBase with Store {
   }
 
   @action
-  void saveValues() async {
+  Future<void> saveValues() async {
     final requestModel = TransactionModel(
+        id: "",
         value: double.tryParse(valueController.text)!,
         title: titleController.text,
         description: descriptionController.text,

@@ -11,7 +11,6 @@ import 'package:money_manager/features/transaction/domain/entities/transactions.
 
 import 'home_repository_impl_test.mocks.dart';
 
-
 @GenerateMocks([
   TransactionRemoteDataSource
 ], customMocks: [
@@ -20,21 +19,23 @@ import 'home_repository_impl_test.mocks.dart';
       onMissingStub: OnMissingStub.returnDefault),
 ])
 void main() {
-  late  MockTransactionRemoteDataSource mockTransactionRemoteDataSource;
+  late MockTransactionRemoteDataSource mockTransactionRemoteDataSource;
   late TransactionRepositoryImpl repository;
 
   setUp(() {
     mockTransactionRemoteDataSource = MockTransactionRemoteDataSource();
-    repository = TransactionRepositoryImpl(remoteDataSource: mockTransactionRemoteDataSource);
+    repository = TransactionRepositoryImpl(
+        remoteDataSource: mockTransactionRemoteDataSource);
   });
 
   group('getMonthTransactionList', () {
     final tTransactionModel = [
       TransactionModel(
+          id: "teste",
           value: 18.80,
           title: 'title',
           description: 'description',
-          category : "Casa",
+          category: "Casa",
           date: DateTime.now())
     ];
     final List<Transaction> tTransaction = tTransactionModel;

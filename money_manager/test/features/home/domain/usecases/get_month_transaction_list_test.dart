@@ -18,13 +18,16 @@ void main() {
   setUp(() {
     mockTransactionRepository = MockTransactionRepository();
     usecase = GetMonthTransactionList(mockTransactionRepository);
-    tTransaction = [Transaction(
-      value: 1.0,
-      title: 'test',
-      description: 'test',
-      category : "Casa",
-      date: DateTime.now(),
-    )];
+    tTransaction = [
+      Transaction(
+        id: "teste",
+        value: 1.0,
+        title: 'test',
+        description: 'test',
+        category: "Casa",
+        date: DateTime.now(),
+      )
+    ];
   });
 
   test(
