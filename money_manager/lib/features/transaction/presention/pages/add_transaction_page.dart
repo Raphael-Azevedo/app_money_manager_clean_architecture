@@ -37,6 +37,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   void initState() {
     super.initState();
     controller = sl<TransactionController>();
+    controller.clearController();
   }
 
   void _showErrorDialog(String msg) {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:money_manager/features/transaction/presention/widgets/adaptative_data_picker.dart';
 
 import '../../../../core/common_widgets/app_drawer.dart';
+import '../../../../core/dependency_injection/injection_container.dart';
+import '../controller/transaction_controller.dart';
 
 class UpdateTransactionPage extends StatefulWidget {
   static String route = 'update_transaction';
@@ -12,7 +14,26 @@ class UpdateTransactionPage extends StatefulWidget {
 }
 
 class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
+  late final TransactionController controller;
   DateTime selecetedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    controller = sl<TransactionController>();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final RouteSettings args = ModalRoute.of(context)!.settings;
+    final dynamic transaction = args.arguments;
+    controller.titleController.text = transaction.title;
+    controller.descriptionController.text = transaction.description;
+    selecetedDate = transaction.date;
+    controller.valueController.text = transaction.value.toString();
+    controller.categoryController = transaction.category;
+  }
 
   final _categories = [
     'Moradia',
@@ -71,7 +92,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                       width: 300,
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        // controller: controller.valueController,
+                        controller: controller.valueController,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -112,8 +133,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.85,
                       child: TextFormField(
-                        // controller: controller,
-                        // keyboardType: keyboardType,
+                        controller: controller.titleController,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.title_outlined),
                             labelText: 'Título'),
@@ -128,8 +148,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.85,
                       child: TextFormField(
-                        // controller: controller,
-                        // keyboardType: keyboardType,
+                        controller: controller.descriptionController,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.description),
                             labelText: 'Descrição'),
@@ -148,7 +167,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                         onDateChanged: (newDate) {
                           setState(() {
                             selecetedDate = newDate;
-                            //controller.dateController = newDate;
+                            controller.dateController = newDate;
                           });
                         },
                       ),

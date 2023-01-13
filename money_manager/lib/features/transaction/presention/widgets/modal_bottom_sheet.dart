@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../pages/update_transaction_page.dart';
 
 class ModalBottomSheet extends StatelessWidget {
-  const ModalBottomSheet({super.key});
+  final dynamic transaction;
+  const ModalBottomSheet({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +21,15 @@ class ModalBottomSheet extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               height: 50,
-              child: const ListTile(
-                leading: Icon(
+              child: ListTile(
+                leading: const Icon(
                   Icons.arrow_circle_up_outlined,
                   size: 40,
                   color: Colors.green,
                 ),
                 title: Text(
-                  "Titulo",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  transaction.title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -37,32 +39,34 @@ class ModalBottomSheet extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Column(
-                      children: const [
+                      children: [
                         ListTile(
-                          leading: Icon(Icons.description),
-                          title: Text('Descrição '),
-                          subtitle: Text('Teste '),
+                          leading: const Icon(Icons.description),
+                          title: const Text('Descrição '),
+                          subtitle: Text(transaction.description),
                         ),
                         ListTile(
-                          leading: Icon(Icons.apps),
-                          title: Text('Categoria '),
-                          subtitle: Text('Teste '),
+                          leading: const Icon(Icons.apps),
+                          title: const Text('Categoria '),
+                          subtitle: Text(transaction.category),
                         ),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Column(
-                      children: const [
+                      children: [
                         ListTile(
-                          leading: Icon(Icons.calendar_month_outlined),
-                          title: Text('Data '),
-                          subtitle: Text('13 jan 2023'),
+                          leading: const Icon(Icons.calendar_month_outlined),
+                          title: const Text('Data '),
+                          subtitle: Text(DateFormat('dd/MM/yyyy')
+                              .format(transaction.date)),
                         ),
                         ListTile(
-                          leading: Icon(Icons.payments_outlined),
-                          title: Text('Valor '),
-                          subtitle: Text('\$500.00'),
+                          leading: const Icon(Icons.payments_outlined),
+                          title: const Text('Valor '),
+                          subtitle: Text(
+                              'R\$ ${transaction.value.toStringAsFixed(2)}'),
                         ),
                       ],
                     ),
@@ -78,7 +82,7 @@ class ModalBottomSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25)),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, UpdateTransactionPage.route);
+                  Navigator.pushNamed(context, UpdateTransactionPage.route, arguments: transaction);
                 },
                 child: const Text('Editar Transação'),
               ),
