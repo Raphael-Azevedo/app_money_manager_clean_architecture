@@ -11,7 +11,9 @@ import 'package:money_manager/features/transaction/presention/pages/add_transact
 import 'package:money_manager/features/transaction/presention/pages/transaction_page.dart';
 import 'package:money_manager/features/transaction/presention/pages/update_transaction_page.dart';
 
+import '../../features/transaction/domain/usecases/delete_transaction.dart';
 import '../../features/transaction/domain/usecases/get_year_transaction_list.dart';
+import '../../features/transaction/domain/usecases/update_transaction.dart';
 import '../../features/transaction/presention/pages/home_page.dart';
 
 final sl = GetIt.instance;
@@ -21,15 +23,21 @@ Future<void> init() async {
   sl.registerLazySingleton(() => TransactionController(
       getMonthTransactionListUseCase: sl(),
       getYearTransactionListUseCase: sl(),
-      addTransactionUseCase: sl()));
+      addTransactionUseCase: sl(),
+      deleteTransactionUseCase: sl(),
+      updateTransactionUseCase: sl()));
   // Use cases
   sl.registerLazySingleton(() => GetMonthTransactionList(sl()));
   sl.registerLazySingleton(() => GetYearTransactionList(sl()));
   sl.registerFactory(() => AddTransaction(sl()));
+  sl.registerFactory(() => UpdateTransaction(sl()));
+  sl.registerFactory(() => DeleteTransaction(sl()));
+
   // Repository
-  sl.registerLazySingleton<TransactionRepository>(() => TransactionRepositoryImpl(
-        remoteDataSource: sl(),
-      ));
+  sl.registerLazySingleton<TransactionRepository>(
+      () => TransactionRepositoryImpl(
+            remoteDataSource: sl(),
+          ));
   // Data Sources
   sl.registerLazySingleton<TransactionRemoteDataSource>(
       () => HomeRemoteDataSourceImpl());

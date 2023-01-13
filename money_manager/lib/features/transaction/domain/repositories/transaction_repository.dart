@@ -7,4 +7,7 @@ abstract class TransactionRepository {
   Future<Either<Failure, List<Transaction>>>? getMonthTransactionList();
   Future<Either<Failure, List<Transaction>>>? getYearTransactionList();
   Future<Either<Failure, Map<String, dynamic>>> addTransaction(TransactionModel params);
+  Future<Either<Failure, Map<String, dynamic>>> updateTransaction(TransactionModel params);
+  Future<Either<Failure, Map<String, dynamic>>> deleteTransaction(TransactionModel params);
+
 }

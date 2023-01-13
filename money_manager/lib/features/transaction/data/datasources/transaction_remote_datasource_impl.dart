@@ -77,13 +77,33 @@ class HomeRemoteDataSourceImpl extends TransactionRemoteDataSource {
 
   @override
   Future<Map<String, dynamic>> deleteTransaction(TransactionModel params) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
+    final result = TransactionModel(
+            id: params.id,
+            value: params.value,
+            title: params.title,
+            description: params.description,
+            category: params.category,
+            date: params.date)
+        .toJson();
+    var oldResult = response.where((e) => e['Id'] == params.id).first;
+    var index = response.indexOf(oldResult);
+    response.removeAt(index);
+    return Future.value(result);
   }
 
   @override
   Future<Map<String, dynamic>> updateTransaction(TransactionModel params) {
-    // TODO: implement updateTransaction
-    throw UnimplementedError();
+    final result = TransactionModel(
+            id: params.id,
+            value: params.value,
+            title: params.title,
+            description: params.description,
+            category: params.category,
+            date: params.date)
+        .toJson();
+    var oldResult = response.where((e) => e['Id'] == params.id).first;
+    var index = response.indexOf(oldResult);
+    response[index] = result;
+    return Future.value(result);
   }
 }

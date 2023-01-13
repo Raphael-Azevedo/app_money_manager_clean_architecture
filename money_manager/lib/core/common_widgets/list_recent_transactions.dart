@@ -17,6 +17,16 @@ class RecentTransactions extends StatefulWidget {
 class _RecentTransactionsState extends State<RecentTransactions> {
   List<dynamic> transactions = [];
 
+  void _deleteTransaction(dynamic transaction) {
+    widget.controller.descriptionController.text = transaction.description;
+    widget.controller.titleController.text = transaction.title;
+    widget.controller.valueController.text = transaction.value.toString();
+    widget.controller.categoryController = transaction.category;
+    widget.controller.idController.text = transaction.id;
+    widget.controller.dateController = transaction.date;
+    widget.controller.deleteValues();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,7 +104,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                             );
                           },
                           onDismissed: (_) {
-                            // função para remover
+                            _deleteTransaction(transactions[index]);
                           },
                           child: GestureDetector(
                             onTap: (() {

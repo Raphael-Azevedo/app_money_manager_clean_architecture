@@ -8,6 +8,8 @@ import 'package:money_manager/features/transaction/domain/usecases/get_year_tran
 import '../../../../core/dependency_injection/injection_container.dart';
 import '../../data/models/transaction_model.dart';
 import '../../domain/entities/transactions.dart';
+import '../../domain/usecases/delete_transaction.dart';
+import '../../domain/usecases/update_transaction.dart';
 
 part 'transaction_controller.g.dart';
 
@@ -19,12 +21,17 @@ abstract class _TransactionControllerBase with Store {
   late final GetMonthTransactionList getMonthTransactionListUseCase;
   late final GetYearTransactionList getYearTransactionListUseCase;
   late final AddTransaction addTransactionUseCase;
+  late final UpdateTransaction updateTransactionUseCase;
+  late final DeleteTransaction deleteTransactionUseCase;
 
   _TransactionControllerBase(
       {required this.getMonthTransactionListUseCase,
       required this.getYearTransactionListUseCase,
-      required this.addTransactionUseCase});
+      required this.addTransactionUseCase,
+      required this.updateTransactionUseCase,
+      required this.deleteTransactionUseCase});
 
+  final idController = TextEditingController();
   final valueController = TextEditingController();
   final descriptionController = TextEditingController();
   final titleController = TextEditingController();
@@ -127,6 +134,32 @@ abstract class _TransactionControllerBase with Store {
         category: categoryController,
         date: dateController);
     await addTransactionUseCase(requestModel);
+    clearController();
+  }
+
+  @action
+  Future<void> deleteValues() async {
+    final requestModel = TransactionModel(
+        id: idController.text,
+        value: double.tryParse(valueController.text)!,
+        title: titleController.text,
+        description: descriptionController.text,
+        category: categoryController,
+        date: dateController);
+    await deleteTransactionUseCase(requestModel);
+    clearController();
+  }
+
+  @action
+  Future<void> updateValues() async {
+    final requestModel = TransactionModel(
+        id: idController.text,
+        value: double.tryParse(valueController.text)!,
+        title: titleController.text,
+        description: descriptionController.text,
+        category: categoryController,
+        date: dateController);
+    await updateTransactionUseCase(requestModel);
     clearController();
   }
 

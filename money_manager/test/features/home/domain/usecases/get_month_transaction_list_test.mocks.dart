@@ -61,4 +61,40 @@ class MockTransactionRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>> updateTransaction(
+          _i6.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateTransaction,
+          [params],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>>.value(
+                _FakeEither_0<_i5.Failure, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #updateTransaction,
+            [params],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>> deleteTransaction(
+          _i6.TransactionModel? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteTransaction,
+          [params],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>>.value(
+                _FakeEither_0<_i5.Failure, Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #deleteTransaction,
+            [params],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, Map<String, dynamic>>>);
 }

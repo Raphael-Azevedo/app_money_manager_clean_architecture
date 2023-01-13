@@ -33,6 +33,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
     selecetedDate = transaction.date;
     controller.valueController.text = transaction.value.toString();
     _currentItemSelected = transaction.category;
+    controller.idController.text = transaction.id;
   }
 
   final _categories = [
@@ -48,6 +49,13 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
     'Outros',
   ];
   String _currentItemSelected = 'Moradia';
+
+  void _updateTransaction() {
+    controller.categoryController = _currentItemSelected;
+    controller.updateValues();
+    controller.initializeController();
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +189,9 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _updateTransaction();
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.check),
       ),

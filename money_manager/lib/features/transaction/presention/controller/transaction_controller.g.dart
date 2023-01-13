@@ -177,8 +177,24 @@ mixin _$TransactionController on _TransactionControllerBase, Store {
       AsyncAction('_TransactionControllerBase.saveValues', context: context);
 
   @override
-  Future saveValues() {
+  Future<void> saveValues() {
     return _$saveValuesAsyncAction.run(() => super.saveValues());
+  }
+
+  late final _$deleteValuesAsyncAction =
+      AsyncAction('_TransactionControllerBase.deleteValues', context: context);
+
+  @override
+  Future<void> deleteValues() {
+    return _$deleteValuesAsyncAction.run(() => super.deleteValues());
+  }
+
+  late final _$updateValuesAsyncAction =
+      AsyncAction('_TransactionControllerBase.updateValues', context: context);
+
+  @override
+  Future<void> updateValues() {
+    return _$updateValuesAsyncAction.run(() => super.updateValues());
   }
 
   late final _$_TransactionControllerBaseActionController =

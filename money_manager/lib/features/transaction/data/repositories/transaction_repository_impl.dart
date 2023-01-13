@@ -44,4 +44,26 @@ class TransactionRepositoryImpl extends TransactionRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> deleteTransaction(
+      TransactionModel params) async {
+    try {
+      final response = await remoteDataSource.deleteTransaction(params);
+      return Right(response);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> updateTransaction(
+      TransactionModel params) async {
+    try {
+      final response = await remoteDataSource.updateTransaction(params);
+      return Right(response);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
