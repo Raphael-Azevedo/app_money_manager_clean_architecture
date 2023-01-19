@@ -28,12 +28,14 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
     super.didChangeDependencies();
     final RouteSettings args = ModalRoute.of(context)!.settings;
     final dynamic transaction = args.arguments;
-    controller.titleController.text = transaction.title;
-    controller.descriptionController.text = transaction.description;
+    controller.transaction.title.text = transaction.title;
+    controller.transaction.description.text = transaction.description;
     selecetedDate = transaction.date;
-    controller.valueController.text = transaction.value.toString();
+    controller.transaction.value.text = transaction.value.toString();
     _currentItemSelected = transaction.category;
-    controller.idController.text = transaction.rowKey;
+    controller.transaction.rowKey = transaction.rowKey;
+    controller.transaction.timestamp = transaction.timestamp;
+    controller.transaction.eTag = transaction.eTag;
   }
 
   final _categories = [
@@ -51,7 +53,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
   String _currentItemSelected = 'Moradia';
 
   void _updateTransaction() {
-    controller.categoryController = _currentItemSelected;
+    controller.transaction.category = _currentItemSelected;
     controller.updateValues();
     controller.initializeController();
     Navigator.of(context).pop();
@@ -100,7 +102,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                       width: 300,
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: controller.valueController,
+                        controller: controller.transaction.value,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -141,7 +143,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.85,
                       child: TextFormField(
-                        controller: controller.titleController,
+                        controller: controller.transaction.title,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.title_outlined),
                             labelText: 'Título'),
@@ -156,7 +158,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.85,
                       child: TextFormField(
-                        controller: controller.descriptionController,
+                        controller: controller.transaction.description,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.description),
                             labelText: 'Descrição'),
@@ -175,7 +177,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
                         onDateChanged: (newDate) {
                           setState(() {
                             selecetedDate = newDate;
-                            controller.dateController = newDate;
+                            controller.transaction.date = newDate;
                           });
                         },
                       ),

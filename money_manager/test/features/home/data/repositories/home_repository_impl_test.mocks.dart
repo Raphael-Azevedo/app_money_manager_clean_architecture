@@ -8,6 +8,8 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:money_manager/features/transaction/data/datasources/interface/transaction_remote_datasource.dart'
     as _i2;
+import 'package:money_manager/features/transaction/data/models/transaction_add_model.dart'
+    as _i5;
 import 'package:money_manager/features/transaction/data/models/transaction_model.dart'
     as _i4;
 
@@ -53,7 +55,7 @@ class MockTransactionRemoteDataSource extends _i1.Mock
       ) as _i3.Future<List<_i4.TransactionModel>>);
   @override
   _i3.Future<Map<String, dynamic>> addTransaction(
-          _i4.TransactionModel? params) =>
+          _i5.TransactionAddModel? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #addTransaction,
@@ -117,7 +119,7 @@ class mockTransactionRemoteDataSourceForTest extends _i1.Mock
       ) as _i3.Future<List<_i4.TransactionModel>>);
   @override
   _i3.Future<Map<String, dynamic>> addTransaction(
-          _i4.TransactionModel? params) =>
+          _i5.TransactionAddModel? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #addTransaction,

@@ -18,12 +18,14 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   List<dynamic> transactions = [];
 
   void _deleteTransaction(dynamic transaction) {
-    widget.controller.descriptionController.text = transaction.description;
-    widget.controller.titleController.text = transaction.title;
-    widget.controller.valueController.text = transaction.value.toString();
-    widget.controller.categoryController = transaction.category;
-    widget.controller.idController.text = transaction.id;
-    widget.controller.dateController = transaction.date;
+    widget.controller.transaction.description.text = transaction.description;
+    widget.controller.transaction.title.text = transaction.title;
+    widget.controller.transaction.value.text = transaction.value.toString();
+    widget.controller.transaction.category = transaction.category;
+    widget.controller.transaction.rowKey = transaction.rowKey;
+    widget.controller.transaction.date = transaction.date;
+    widget.controller.transaction.timestamp = transaction.timestamp;
+    widget.controller.transaction.eTag = transaction.eTag;
     widget.controller.deleteValues();
   }
 

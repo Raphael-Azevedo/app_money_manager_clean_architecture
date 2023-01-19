@@ -54,6 +54,7 @@ class _TransactionPageState extends State<TransactionPage> {
         body: RefreshIndicator(
           onRefresh: () => refreshTransactions(context),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 const SizedBox(

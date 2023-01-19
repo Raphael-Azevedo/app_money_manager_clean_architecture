@@ -11,6 +11,7 @@ import '../../data/models/transaction_model.dart';
 import '../../domain/entities/transactions.dart';
 import '../../domain/usecases/delete_transaction.dart';
 import '../../domain/usecases/update_transaction.dart';
+import '../view_model/transaction_view_model.dart';
 
 part 'transaction_controller.g.dart';
 
@@ -32,12 +33,13 @@ abstract class _TransactionControllerBase with Store {
       required this.updateTransactionUseCase,
       required this.deleteTransactionUseCase});
 
-  final idController = TextEditingController();
-  final valueController = TextEditingController();
-  final descriptionController = TextEditingController();
-  final titleController = TextEditingController();
-  DateTime dateController = DateTime.now();
-  String categoryController = '';
+  TransactionViewModel transaction = TransactionViewModel("", "",
+      rowKey: "",
+      value: TextEditingController(),
+      title: TextEditingController(),
+      description: TextEditingController(),
+      category: "",
+      date: DateTime.now());
 
   BuildContext? buildContext;
 
@@ -127,40 +129,28 @@ abstract class _TransactionControllerBase with Store {
 
   @action
   Future<void> saveValues() async {
-    final requestModel = TransactionAddModel("", "",
+    final value = transaction.value.text;
+    final requestModel = TransactionAddModel(
+        transaction.timestamp, transaction.eTag,
         rowKey: "",
-        value: double.tryParse(valueController.text)!,
-        title: titleController.text,
-        description: descriptionController.text,
-        category: categoryController,
-        date: dateController);
+        value: double.tryParse(value) ?? 0.0,
+        title: transaction.title.text,
+        description: transaction.description.text,
+        category: transaction.category,
+        date: transaction.date);
     await addTransactionUseCase(requestModel);
     clearController();
   }
 
   @action
   Future<void> deleteValues() async {
-    final requestModel = TransactionModel("", "",
-        rowKey: idController.text,
-        value: double.tryParse(valueController.text)!,
-        title: titleController.text,
-        description: descriptionController.text,
-        category: categoryController,
-        date: dateController);
-    await deleteTransactionUseCase(requestModel);
+    await deleteTransactionUseCase(getTransactionModel());
     clearController();
   }
 
   @action
   Future<void> updateValues() async {
-    final requestModel = TransactionModel("", "",
-        rowKey: idController.text,
-        value: double.tryParse(valueController.text)!,
-        title: titleController.text,
-        description: descriptionController.text,
-        category: categoryController,
-        date: dateController);
-    await updateTransactionUseCase(requestModel);
+    await updateTransactionUseCase(getTransactionModel());
     clearController();
   }
 
@@ -171,11 +161,13 @@ abstract class _TransactionControllerBase with Store {
   }
 
   void clearController() {
-    valueController.clear();
-    titleController.clear();
-    descriptionController.clear();
-    categoryController = '';
-    dateController = DateTime.now();
+    transaction = TransactionViewModel("", "",
+        rowKey: "",
+        value: TextEditingController(),
+        title: TextEditingController(),
+        description: TextEditingController(),
+        category: "",
+        date: DateTime.now());
   }
 
   void filterTransactions() {
@@ -203,5 +195,18 @@ abstract class _TransactionControllerBase with Store {
       getMonthTransactionList(),
       getAllTransactions(),
     ]);
+  }
+
+  TransactionModel getTransactionModel() {
+    final value = transaction.value.text;
+    final requestModel = TransactionModel(
+        transaction.timestamp, transaction.eTag,
+        rowKey: transaction.rowKey,
+        value: double.tryParse(value) ?? 0.0,
+        title: transaction.title.text,
+        description: transaction.description.text,
+        category: transaction.category,
+        date: transaction.date);
+    return requestModel;
   }
 }

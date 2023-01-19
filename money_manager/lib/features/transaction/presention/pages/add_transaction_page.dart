@@ -16,7 +16,7 @@ class AddTransactionPage extends StatefulWidget {
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
-  late final TransactionController controller;
+  late TransactionController controller;
   DateTime selecetedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
 
@@ -95,7 +95,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                         width: 300,
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          controller: controller.valueController,
+                          controller: controller.transaction.value,
                           style: TextStyle(
                             fontSize: 50,
                             fontWeight: FontWeight.bold,
@@ -152,23 +152,21 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   onDateChanged: (newDate) {
                     setState(() {
                       selecetedDate = newDate;
-                      controller.dateController = newDate;
+                      controller.transaction.date = newDate;
                     });
                   },
                 ),
                 AdaptativeTextField(
-                    controller: controller.titleController, label: 'Título'),
+                    controller: controller.transaction.title, label: 'Título'),
                 AdaptativeTextField(
-                    controller: controller.descriptionController,
-                    label: 'Descrição'),
+                    controller: controller.transaction.description, label: 'Descrição'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     AdaptativeButton('Nova Transação', () {
                       try {
                         if (args.arguments == true) {
-                          controller.valueController.text =
-                              "-${controller.valueController.text}";
+                          controller.transaction.value.text = "-${controller.transaction.value.text}";
                         }
                         final isValid =
                             _formKey.currentState?.validate() ?? false;

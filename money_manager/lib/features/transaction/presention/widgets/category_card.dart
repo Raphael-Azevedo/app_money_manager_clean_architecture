@@ -34,7 +34,7 @@ class _CategoryCardState extends State<CategoryCard> {
             selecionado = !selecionado;
             valorSelecionado = 1;
             if (selecionado) {
-              controller.categoryController = widget.cardName;
+              controller.transaction.category = widget.cardName;
             }
           });
         },

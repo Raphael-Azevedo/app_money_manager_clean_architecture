@@ -35,13 +35,17 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Despesas Pessoais'),
       ),
       drawer: const AppDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            HomeCard(controller: controller),
-            const SizedBox(height: 20),
-            RecentTransactions(true, controller: controller),
-          ],
+      body: RefreshIndicator(
+        onRefresh: () =>
+            Navigator.pushReplacementNamed(context, HomePage.route),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              HomeCard(controller: controller),
+              const SizedBox(height: 20),
+              RecentTransactions(true, controller: controller),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
