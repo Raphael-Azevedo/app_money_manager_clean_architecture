@@ -58,112 +58,113 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               return SizedBox(
                 height: 450,
                 child: ListView.builder(
-                    itemCount: transactions.length,
-                    itemBuilder: ((context, index) => Dismissible(
-                          key: ValueKey(transactions[index]),
-                          direction: DismissDirection.endToStart,
-                          background: Container(
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.error,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(35))),
-                            alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.only(right: 20),
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 4,
-                            ),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                              size: 40,
-                            ),
+                  itemCount: transactions.length,
+                  itemBuilder: ((context, index) => Dismissible(
+                        key: ValueKey(transactions[index]),
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.error,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(35))),
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.only(right: 20),
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 4,
                           ),
-                          confirmDismiss: (_) {
-                            return showDialog<bool>(
-                              context: context,
-                              builder: ((ctx) => AlertDialog(
-                                    title: const Text('Tem Certeza?'),
-                                    content:
-                                        const Text('Quer remover a Transação?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(ctx).pop(false);
-                                        },
-                                        child: const Text('Não'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(ctx).pop(true);
-                                        },
-                                        child: const Text('Sim'),
-                                      ),
-                                    ],
-                                  )),
-                            );
-                          },
-                          onDismissed: (_) {
-                            _deleteTransaction(transactions[index]);
-                          },
-                          child: GestureDetector(
-                            onTap: (() {
-                              showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(25.0),
-                                  ),
-                                ),
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return ModalBottomSheet(
-                                      transaction: transactions[index]);
-                                },
-                              );
-                            }),
-                            child: Container(
-                              margin: const EdgeInsets.all(10),
-                              padding: const EdgeInsets.all(10),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(35))),
-                              child: ListTile(
-                                leading: (transactions[index].value > 0)
-                                    ? const Icon(
-                                        Icons.arrow_circle_up_sharp,
-                                        color: Colors.green,
-                                        size: 50,
-                                      )
-                                    : const Icon(
-                                        Icons.arrow_circle_down_sharp,
-                                        color: Colors.red,
-                                        size: 50,
-                                      ),
-                                title: Text(transactions[index].title),
-                                subtitle: Text(transactions[index].description),
-                                trailing: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'R\$ ${transactions[index].value.toStringAsFixed(2)}',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: (transactions[index].value > 0)
-                                              ? Colors.green
-                                              : Colors.red),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
+                        confirmDismiss: (_) {
+                          return showDialog<bool>(
+                            context: context,
+                            builder: ((ctx) => AlertDialog(
+                                  title: const Text('Tem Certeza?'),
+                                  content:
+                                      const Text('Quer remover a Transação?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop(false);
+                                      },
+                                      child: const Text('Não'),
                                     ),
-                                    Text(DateFormat('dd/MM/yyyy')
-                                        .format(transactions[index].date)),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop(true);
+                                      },
+                                      child: const Text('Sim'),
+                                    ),
                                   ],
+                                )),
+                          );
+                        },
+                        onDismissed: (_) {
+                          _deleteTransaction(transactions[index]);
+                        },
+                        child: GestureDetector(
+                          onTap: (() {
+                            showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25.0),
                                 ),
+                              ),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return ModalBottomSheet(
+                                    transaction: transactions[index]);
+                              },
+                            );
+                          }),
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(35))),
+                            child: ListTile(
+                              leading: (transactions[index].value > 0)
+                                  ? const Icon(
+                                      Icons.arrow_circle_up_sharp,
+                                      color: Colors.green,
+                                      size: 50,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_circle_down_sharp,
+                                      color: Colors.red,
+                                      size: 50,
+                                    ),
+                              title: Text(transactions[index].title),
+                              subtitle: Text(transactions[index].description),
+                              trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'R\$ ${transactions[index].value.toStringAsFixed(2)}',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: (transactions[index].value > 0)
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                  Text(DateFormat('dd/MM/yyyy')
+                                      .format(transactions[index].date)),
+                                ],
                               ),
                             ),
                           ),
-                        ))),
+                        ),
+                      )),
+                ),
               );
             }),
           ),

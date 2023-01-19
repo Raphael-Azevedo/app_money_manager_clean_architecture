@@ -33,7 +33,7 @@ class _UpdateTransactionPageState extends State<UpdateTransactionPage> {
     selecetedDate = transaction.date;
     controller.valueController.text = transaction.value.toString();
     _currentItemSelected = transaction.category;
-    controller.idController.text = transaction.id;
+    controller.idController.text = transaction.rowKey;
   }
 
   final _categories = [

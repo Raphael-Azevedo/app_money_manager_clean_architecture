@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction_model.dart';
+part of 'transaction_add_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
-    TransactionModel(
-      json['timestamp'] as String?,
-      json['eTag'] as String?,
+TransactionAddModel _$TransactionAddModelFromJson(Map<String, dynamic> json) =>
+    TransactionAddModel(
+      json['timestamp'],
+      json['eTag'],
       rowKey: json['rowKey'] as String,
       value: (json['value'] as num).toDouble(),
       title: json['title'] as String,
@@ -18,7 +18,8 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
       date: DateTime.parse(json['date'] as String),
     );
 
-Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
+Map<String, dynamic> _$TransactionAddModelToJson(
+        TransactionAddModel instance) =>
     <String, dynamic>{
       'rowKey': instance.rowKey,
       'value': instance.value,

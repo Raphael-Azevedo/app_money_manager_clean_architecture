@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:money_manager/features/transaction/domain/repositories/transaction_repository.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../models/transaction_add_model.dart';
 
 class TransactionRepositoryImpl extends TransactionRepository {
   final TransactionRemoteDataSource remoteDataSource;
@@ -36,7 +37,7 @@ class TransactionRepositoryImpl extends TransactionRepository {
 
   @override
   Future<Either<Failure, Map<String, dynamic>>> addTransaction(
-      TransactionModel params) async {
+      TransactionAddModel params) async {
     try {
       final response = await remoteDataSource.addTransaction(params);
       return Right(response);

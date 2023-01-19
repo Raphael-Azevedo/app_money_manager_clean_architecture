@@ -6,6 +6,7 @@ import 'package:money_manager/features/transaction/domain/usecases/get_month_tra
 import 'package:money_manager/features/transaction/domain/usecases/get_year_transaction_list.dart';
 
 import '../../../../core/dependency_injection/injection_container.dart';
+import '../../data/models/transaction_add_model.dart';
 import '../../data/models/transaction_model.dart';
 import '../../domain/entities/transactions.dart';
 import '../../domain/usecases/delete_transaction.dart';
@@ -126,8 +127,8 @@ abstract class _TransactionControllerBase with Store {
 
   @action
   Future<void> saveValues() async {
-    final requestModel = TransactionModel(
-        id: "",
+    final requestModel = TransactionAddModel("", "",
+        rowKey: "",
         value: double.tryParse(valueController.text)!,
         title: titleController.text,
         description: descriptionController.text,
@@ -139,8 +140,8 @@ abstract class _TransactionControllerBase with Store {
 
   @action
   Future<void> deleteValues() async {
-    final requestModel = TransactionModel(
-        id: idController.text,
+    final requestModel = TransactionModel("", "",
+        rowKey: idController.text,
         value: double.tryParse(valueController.text)!,
         title: titleController.text,
         description: descriptionController.text,
@@ -152,8 +153,8 @@ abstract class _TransactionControllerBase with Store {
 
   @action
   Future<void> updateValues() async {
-    final requestModel = TransactionModel(
-        id: idController.text,
+    final requestModel = TransactionModel("", "",
+        rowKey: idController.text,
         value: double.tryParse(valueController.text)!,
         title: titleController.text,
         description: descriptionController.text,

@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:money_manager/features/transaction/domain/entities/transactions.dart';
 
-part 'transaction_model.g.dart';
+part 'transaction_add_model.g.dart';
 
 @JsonSerializable()
-class TransactionModel extends Transaction {
-  const TransactionModel(
-    String? timestamp,
-    String? eTag,{
+class TransactionAddModel extends Transaction {
+ const TransactionAddModel(
+    timestamp,
+    eTag, {
     required String rowKey,
     required double value,
     required String title,
@@ -25,8 +25,8 @@ class TransactionModel extends Transaction {
           date: date,
         );
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      _$TransactionModelFromJson(json);
+  factory TransactionAddModel.fromJson(Map<String, dynamic> json) =>
+      _$TransactionAddModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TransactionModelToJson(this);
+  Map<String, dynamic> toJson() => _$TransactionAddModelToJson(this);
 }

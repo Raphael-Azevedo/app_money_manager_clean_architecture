@@ -8,7 +8,7 @@ import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
   final tTransactionModel = TransactionModel(
-    id: "teste",
+    rowKey: "teste",
     value: 1.0,
     title: 'test',
     description: 'test',
@@ -50,7 +50,7 @@ void main() {
           final result = tTransactionModel.toJson();
           // assert
           final expectedMap = {
-            "Id": "teste",
+            "rowKey": "teste",
             "Value": 1.0,
             "Title": "test",
             "Description": "test",

@@ -6,15 +6,16 @@ import '../../data/models/transaction_model.dart';
 import '../entities/transactions.dart';
 import '../repositories/transaction_repository.dart';
 
-class DeleteTransaction implements UseCaseSingle<Transaction, TransactionModel> {
+class DeleteTransaction
+    implements UseCaseSingle<Transaction, TransactionModel> {
   final TransactionRepository repository;
 
   DeleteTransaction(this.repository);
 
   @override
   Future<Either<Failure, Map<String, dynamic>>?> call(params) async {
-    final requestModel = TransactionModel(
-        id: params.id,
+    final requestModel = TransactionModel(params.timestamp, params.eTag,
+        rowKey: params.rowKey,
         value: params.value,
         title: params.title,
         description: params.description,

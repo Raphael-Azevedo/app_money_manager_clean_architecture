@@ -14,8 +14,8 @@ class UpdateTransaction
 
   @override
   Future<Either<Failure, Map<String, dynamic>>?> call(params) async {
-    final requestModel = TransactionModel(
-        id: params.id,
+    final requestModel = TransactionModel(params.timestamp, params.eTag,
+        rowKey: params.rowKey,
         value: params.value,
         title: params.title,
         description: params.description,
